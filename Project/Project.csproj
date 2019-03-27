@@ -85,6 +85,12 @@
     <Compile Include="ListaRegras.Designer.cs">
       <DependentUpon>ListaRegras.cs</DependentUpon>
     </Compile>
+    <Compile Include="Perguntas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Perguntas.Designer.cs">
+      <DependentUpon>Perguntas.cs</DependentUpon>
+    </Compile>
     <Compile Include="TelaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ListaRegras.resx">
       <DependentUpon>ListaRegras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Perguntas.resx">
+      <DependentUpon>Perguntas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TelaPrincipal.resx">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>

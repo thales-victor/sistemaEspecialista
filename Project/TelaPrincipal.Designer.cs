@@ -33,6 +33,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.criarObjetivo_btn = new System.Windows.Forms.Button();
             this.criarRegra_btn = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.pnTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,12 +88,33 @@
             this.criarRegra_btn.UseVisualStyleBackColor = true;
             this.criarRegra_btn.Click += new System.EventHandler(this.criarRegra_btn_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(120, 275);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 59);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Configurar Objetivos";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(377, 275);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 59);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Play";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(679, 497);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.criarRegra_btn);
             this.Controls.Add(this.criarObjetivo_btn);
             this.Controls.Add(this.button2);
@@ -113,6 +136,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button criarObjetivo_btn;
         private System.Windows.Forms.Button criarRegra_btn;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 

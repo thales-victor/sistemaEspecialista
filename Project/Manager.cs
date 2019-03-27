@@ -130,6 +130,11 @@ namespace Project
             return j_Data.objetivo.ToArray();
         }
 
+        public List<Regra> ListarRegras()
+        {
+            return j_Data.regras;
+        }
+
         /*
         private Tuple<Fato, RespostaFatos, RespostaFatos, RespostaFatos, RespostaFatos> teste()
         {

@@ -35,6 +35,7 @@
             this.criarRegra_btn = new System.Windows.Forms.Button();
             this.regrasCriadas_listbox = new System.Windows.Forms.ListBox();
             this.regrasCriadas_label = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.pnTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,12 +108,23 @@
             this.regrasCriadas_label.TabIndex = 5;
             this.regrasCriadas_label.Text = "Regras criadas";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(111, 298);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Play";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(679, 497);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.regrasCriadas_label);
             this.Controls.Add(this.regrasCriadas_listbox);
             this.Controls.Add(this.criarRegra_btn);
@@ -139,6 +151,7 @@
         private System.Windows.Forms.Button criarRegra_btn;
         private System.Windows.Forms.ListBox regrasCriadas_listbox;
         private System.Windows.Forms.Label regrasCriadas_label;
+        private System.Windows.Forms.Button button3;
     }
 }
 

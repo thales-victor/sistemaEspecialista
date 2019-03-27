@@ -63,5 +63,27 @@ namespace Project
                 e.Value = "Item desconhecido";
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            var regras = Manager.instance.ListarRegras();
+
+            if (regras.Length == 0)
+                return;
+            foreach (var regra in regras)
+            {
+                var condicoes = regra.Condicao;
+                if (condicoes.Count == 0)
+                    return;
+                foreach (var condicao in condicoes)
+                {
+                    using (var perguntas = new Perguntas(condicao))
+                    {
+                        perguntas.ShowDialog();
+                    }
+                }
+            }
+        }
     }
 }

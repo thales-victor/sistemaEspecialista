@@ -44,6 +44,9 @@
             this.salvarFato_btn = new System.Windows.Forms.Button();
             this.listaResposta_listbox = new System.Windows.Forms.ListBox();
             this.cancelar_btn = new System.Windows.Forms.Button();
+            this.lista_fatos_label = new System.Windows.Forms.Label();
+            this.fatos_listbox = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nomeFato_label
@@ -65,7 +68,7 @@
             // tipoResposta_label
             // 
             this.tipoResposta_label.AutoSize = true;
-            this.tipoResposta_label.Location = new System.Drawing.Point(78, 127);
+            this.tipoResposta_label.Location = new System.Drawing.Point(78, 78);
             this.tipoResposta_label.Name = "tipoResposta_label";
             this.tipoResposta_label.Size = new System.Drawing.Size(86, 13);
             this.tipoResposta_label.TabIndex = 2;
@@ -74,7 +77,7 @@
             // univalorada_radio
             // 
             this.univalorada_radio.AutoSize = true;
-            this.univalorada_radio.Location = new System.Drawing.Point(192, 127);
+            this.univalorada_radio.Location = new System.Drawing.Point(192, 78);
             this.univalorada_radio.Name = "univalorada_radio";
             this.univalorada_radio.Size = new System.Drawing.Size(82, 17);
             this.univalorada_radio.TabIndex = 3;
@@ -86,7 +89,7 @@
             // multivalorada_radio
             // 
             this.multivalorada_radio.AutoSize = true;
-            this.multivalorada_radio.Location = new System.Drawing.Point(192, 150);
+            this.multivalorada_radio.Location = new System.Drawing.Point(192, 101);
             this.multivalorada_radio.Name = "multivalorada_radio";
             this.multivalorada_radio.Size = new System.Drawing.Size(88, 17);
             this.multivalorada_radio.TabIndex = 4;
@@ -98,7 +101,7 @@
             // numerica_radio
             // 
             this.numerica_radio.AutoSize = true;
-            this.numerica_radio.Location = new System.Drawing.Point(192, 173);
+            this.numerica_radio.Location = new System.Drawing.Point(192, 124);
             this.numerica_radio.Name = "numerica_radio";
             this.numerica_radio.Size = new System.Drawing.Size(70, 17);
             this.numerica_radio.TabIndex = 5;
@@ -109,14 +112,14 @@
             // 
             // resp_min_txtbox
             // 
-            this.resp_min_txtbox.Location = new System.Drawing.Point(192, 277);
+            this.resp_min_txtbox.Location = new System.Drawing.Point(192, 178);
             this.resp_min_txtbox.Name = "resp_min_txtbox";
             this.resp_min_txtbox.Size = new System.Drawing.Size(100, 20);
             this.resp_min_txtbox.TabIndex = 6;
             // 
             // addResposta_btn
             // 
-            this.addResposta_btn.Location = new System.Drawing.Point(330, 273);
+            this.addResposta_btn.Location = new System.Drawing.Point(330, 174);
             this.addResposta_btn.Name = "addResposta_btn";
             this.addResposta_btn.Size = new System.Drawing.Size(75, 23);
             this.addResposta_btn.TabIndex = 7;
@@ -127,7 +130,7 @@
             // resposta_label
             // 
             this.resposta_label.AutoSize = true;
-            this.resposta_label.Location = new System.Drawing.Point(78, 277);
+            this.resposta_label.Location = new System.Drawing.Point(78, 178);
             this.resposta_label.Name = "resposta_label";
             this.resposta_label.Size = new System.Drawing.Size(52, 13);
             this.resposta_label.TabIndex = 8;
@@ -135,7 +138,7 @@
             // 
             // max_txtbox
             // 
-            this.max_txtbox.Location = new System.Drawing.Point(192, 320);
+            this.max_txtbox.Location = new System.Drawing.Point(192, 221);
             this.max_txtbox.Name = "max_txtbox";
             this.max_txtbox.Size = new System.Drawing.Size(100, 20);
             this.max_txtbox.TabIndex = 9;
@@ -143,7 +146,7 @@
             // min_label
             // 
             this.min_label.AutoSize = true;
-            this.min_label.Location = new System.Drawing.Point(189, 261);
+            this.min_label.Location = new System.Drawing.Point(189, 162);
             this.min_label.Name = "min_label";
             this.min_label.Size = new System.Drawing.Size(24, 13);
             this.min_label.TabIndex = 10;
@@ -152,7 +155,7 @@
             // max_label
             // 
             this.max_label.AutoSize = true;
-            this.max_label.Location = new System.Drawing.Point(189, 304);
+            this.max_label.Location = new System.Drawing.Point(189, 205);
             this.max_label.Name = "max_label";
             this.max_label.Size = new System.Drawing.Size(27, 13);
             this.max_label.TabIndex = 11;
@@ -161,7 +164,7 @@
             // listaResposta_label
             // 
             this.listaResposta_label.AutoSize = true;
-            this.listaResposta_label.Location = new System.Drawing.Point(516, 38);
+            this.listaResposta_label.Location = new System.Drawing.Point(78, 280);
             this.listaResposta_label.Name = "listaResposta_label";
             this.listaResposta_label.Size = new System.Drawing.Size(92, 13);
             this.listaResposta_label.TabIndex = 12;
@@ -180,9 +183,9 @@
             // listaResposta_listbox
             // 
             this.listaResposta_listbox.FormattingEnabled = true;
-            this.listaResposta_listbox.Location = new System.Drawing.Point(519, 78);
+            this.listaResposta_listbox.Location = new System.Drawing.Point(192, 280);
             this.listaResposta_listbox.Name = "listaResposta_listbox";
-            this.listaResposta_listbox.Size = new System.Drawing.Size(120, 95);
+            this.listaResposta_listbox.Size = new System.Drawing.Size(120, 147);
             this.listaResposta_listbox.TabIndex = 14;
             // 
             // cancelar_btn
@@ -195,11 +198,41 @@
             this.cancelar_btn.UseVisualStyleBackColor = true;
             this.cancelar_btn.Click += new System.EventHandler(this.cancelar_btn_Click);
             // 
+            // lista_fatos_label
+            // 
+            this.lista_fatos_label.AutoSize = true;
+            this.lista_fatos_label.Location = new System.Drawing.Point(540, 35);
+            this.lista_fatos_label.Name = "lista_fatos_label";
+            this.lista_fatos_label.Size = new System.Drawing.Size(70, 13);
+            this.lista_fatos_label.TabIndex = 16;
+            this.lista_fatos_label.Text = "Lista de fatos";
+            // 
+            // fatos_listbox
+            // 
+            this.fatos_listbox.FormattingEnabled = true;
+            this.fatos_listbox.Location = new System.Drawing.Point(543, 61);
+            this.fatos_listbox.Name = "fatos_listbox";
+            this.fatos_listbox.Size = new System.Drawing.Size(205, 147);
+            this.fatos_listbox.TabIndex = 17;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(611, 214);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Remover";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AdicionarFato
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.fatos_listbox);
+            this.Controls.Add(this.lista_fatos_label);
             this.Controls.Add(this.cancelar_btn);
             this.Controls.Add(this.listaResposta_listbox);
             this.Controls.Add(this.salvarFato_btn);
@@ -242,5 +275,8 @@
         private System.Windows.Forms.Button salvarFato_btn;
         private System.Windows.Forms.ListBox listaResposta_listbox;
         private System.Windows.Forms.Button cancelar_btn;
+        private System.Windows.Forms.Label lista_fatos_label;
+        private System.Windows.Forms.ListBox fatos_listbox;
+        private System.Windows.Forms.Button button1;
     }
 }

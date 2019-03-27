@@ -65,12 +65,17 @@ namespace Project
                     }
                     break;
             }
-            AtualizaListBox();
+            AtualizaListBoxRespostas();
         }
 
-        private void AtualizaListBox()
+        private void AtualizaListBoxRespostas()
         {
             listaResposta_listbox.DataSource = Respostas.Select(o => o.Descricao).ToList();
+        }
+
+        private void AtualizaListBoxFatos()
+        {
+            fatos_listbox.DataSource = Manager.instance.ListarFatos().Select(o => o.Nome).ToList();
         }
 
         private void GerarRespostasUnivalorado()
@@ -113,8 +118,8 @@ namespace Project
             }
 
             Manager.instance.CriarFato(nome, tipo.Value, Respostas);
-
-            FecharFormAdicionarFato();
+            AtualizaListBoxFatos();
+            Init();
         }
 
         public TipoResposta? BuscaTipoRespostaSelecionada()
@@ -139,7 +144,7 @@ namespace Project
             resp_min_txtbox.Text = string.Empty;
             resp_min_txtbox.Focus();
 
-            AtualizaListBox();
+            AtualizaListBoxRespostas();
         }
 
         public bool IsValid()
@@ -159,12 +164,19 @@ namespace Project
             return true;
         }
 
+        private void Init()
+        {
+            nomeFato_txtbox.Text = string.Empty;
+            univalorada_radio.Checked = true;
+            AlteraRadio(TipoResposta.Univalorado);
+            AtualizaListBoxFatos();
+        }
+
         #region --------------------- EVENTOS ---------------------
 
         private void AdicionarFato_Load(object sender, EventArgs e)
         {
-            univalorada_radio.Checked = true;
-            AlteraRadio(TipoResposta.Univalorado);
+            Init();
         }
 
         private void univalorada_radio_CheckedChanged(object sender, EventArgs e)
@@ -195,7 +207,17 @@ namespace Project
         {
             AdicionarResposta();
         }
-        #endregion --------------------- EVENTOS ---------------------
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var sel = fatos_listbox.SelectedIndex;
+
+            if (sel != -1)
+            {
+                Manager.instance.RemoverFatoIndex(sel);
+                AtualizaListBoxFatos();
+            }
+        }
+        #endregion --------------------- EVENTOS ---------------------
     }
 }

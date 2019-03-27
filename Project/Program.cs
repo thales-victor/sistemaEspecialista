@@ -25,7 +25,7 @@ namespace Project
 
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
-            Application.Run(new frmMain(mgr));
+            Application.Run(new frmMain());
         }
 
         private static void OnProcessExit(object sender, EventArgs e)

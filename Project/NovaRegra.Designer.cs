@@ -45,7 +45,7 @@
             // se_label
             // 
             this.se_label.AutoSize = true;
-            this.se_label.Location = new System.Drawing.Point(154, 100);
+            this.se_label.Location = new System.Drawing.Point(154, 39);
             this.se_label.Name = "se_label";
             this.se_label.Size = new System.Drawing.Size(21, 13);
             this.se_label.TabIndex = 0;
@@ -55,7 +55,7 @@
             // 
             this.fato_combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fato_combobox.FormattingEnabled = true;
-            this.fato_combobox.Location = new System.Drawing.Point(181, 97);
+            this.fato_combobox.Location = new System.Drawing.Point(181, 36);
             this.fato_combobox.Name = "fato_combobox";
             this.fato_combobox.Size = new System.Drawing.Size(121, 21);
             this.fato_combobox.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             this.operador_combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.operador_combobox.FormattingEnabled = true;
-            this.operador_combobox.Location = new System.Drawing.Point(325, 97);
+            this.operador_combobox.Location = new System.Drawing.Point(325, 36);
             this.operador_combobox.Name = "operador_combobox";
             this.operador_combobox.Size = new System.Drawing.Size(54, 21);
             this.operador_combobox.TabIndex = 2;
@@ -74,7 +74,7 @@
             // 
             this.resposta_combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.resposta_combobox.FormattingEnabled = true;
-            this.resposta_combobox.Location = new System.Drawing.Point(396, 97);
+            this.resposta_combobox.Location = new System.Drawing.Point(396, 36);
             this.resposta_combobox.Name = "resposta_combobox";
             this.resposta_combobox.Size = new System.Drawing.Size(121, 21);
             this.resposta_combobox.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             this.gb_Group.Controls.Add(this.ou_radio);
             this.gb_Group.Controls.Add(this.e_radio);
-            this.gb_Group.Location = new System.Drawing.Point(12, 73);
+            this.gb_Group.Location = new System.Drawing.Point(12, 12);
             this.gb_Group.Name = "gb_Group";
             this.gb_Group.Size = new System.Drawing.Size(113, 71);
             this.gb_Group.TabIndex = 4;
@@ -114,7 +114,7 @@
             // 
             // ok_btn
             // 
-            this.ok_btn.Location = new System.Drawing.Point(503, 247);
+            this.ok_btn.Location = new System.Drawing.Point(442, 111);
             this.ok_btn.Name = "ok_btn";
             this.ok_btn.Size = new System.Drawing.Size(75, 23);
             this.ok_btn.TabIndex = 5;
@@ -124,7 +124,7 @@
             // 
             // cancelar_btn
             // 
-            this.cancelar_btn.Location = new System.Drawing.Point(409, 247);
+            this.cancelar_btn.Location = new System.Drawing.Point(348, 111);
             this.cancelar_btn.Name = "cancelar_btn";
             this.cancelar_btn.Size = new System.Drawing.Size(75, 23);
             this.cancelar_btn.TabIndex = 6;
@@ -133,7 +133,7 @@
             // 
             // respostaNumerica
             // 
-            this.respostaNumerica.Location = new System.Drawing.Point(397, 98);
+            this.respostaNumerica.Location = new System.Drawing.Point(397, 37);
             this.respostaNumerica.Name = "respostaNumerica";
             this.respostaNumerica.ReadOnly = true;
             this.respostaNumerica.Size = new System.Drawing.Size(120, 20);
@@ -143,7 +143,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 294);
+            this.ClientSize = new System.Drawing.Size(533, 148);
             this.Controls.Add(this.respostaNumerica);
             this.Controls.Add(this.cancelar_btn);
             this.Controls.Add(this.ok_btn);

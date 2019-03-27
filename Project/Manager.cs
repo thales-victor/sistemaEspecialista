@@ -18,35 +18,28 @@ namespace Project
 
             public int Fatos_UltimoID;
             public List<Fato> fatos;
-
+        
             public int resposta_fatos_UltimoID;
-
-            /*public int resposta_UltimoID;
-            public List<Resposta> respostas;*/
 
             public int regras_UltimoID;
             public List<Regra> regras;
 
-            public int objetivo_UltimoID;
-            public List<Objetivo> objetivo;
-
             public int condição_UltimoID;
             public List<Condicao> condição;
+
+            public List<Fato> ObjetivosAlvo;
 
             public ToJSONData()
             {
                 Fatos_UltimoID = 0;
                 resposta_fatos_UltimoID = 0;
-                //resposta_UltimoID = 0;
                 regras_UltimoID = 0;
-                objetivo_UltimoID = 0;
                 condição_UltimoID = 0;
 
                 fatos = new List<Fato>();
-                //-respostas = new List<Resposta>();
                 regras = new List<Regra>();
-                objetivo = new List<Objetivo>();
                 condição = new List<Condicao>();
+                ObjetivosAlvo = new List<Fato>();
             }
         }
 
@@ -105,64 +98,32 @@ namespace Project
             return fato;
         }
 
-        public Objetivo ObterObjetivo(string nome)
-        {
-            if (j_Data.objetivo.Count == 0)
-                return null;
-
-            var returnvalue = j_Data.objetivo.Where(x => x.Nome == nome);
-            if (returnvalue.Count() == 0)
-                return null;
-
-            return returnvalue.First();
-        }
-        public void CriarObjetivo(string nome, string desc)
-        {
-            j_Data.objetivo.Add(new Objetivo(j_Data.objetivo_UltimoID++, nome, desc));
-            SaveAllData();
-        }
-
-        public void RemoverObjetivoIndex(int index)
-        {
-            if(j_Data.objetivo[index] != null)
-                j_Data.objetivo.Remove(j_Data.objetivo[index]);
-
-            SaveAllData();
-        }
-
-        public void RemoverFatoIndex(int index)
-        {
-            if (j_Data.fatos[index] != null)
-                j_Data.fatos.Remove(j_Data.fatos[index]);
-
-            SaveAllData();
-        }
-
-        public Objetivo[] ListarObjetivos()
-        {
-            return j_Data.objetivo.ToArray();
-        }
-
         public Fato[] ListarFatos()
         {
             return j_Data.fatos.ToArray();
         }
 
-        /*public Resposta[] ListarRespostas()
-        {
-            return j_Data.respostas.ToArray();
-        }*/
 
-        public List<Regra> ListarRegras()
+        public Fato[] ListarAlvos()
         {
-            return j_Data.regras;
+            return j_Data.ObjetivosAlvo.ToArray();
         }
 
-        /*
-        private Tuple<Fato, RespostaFatos, RespostaFatos, RespostaFatos, RespostaFatos> teste()
+        public void AtualizarAlvos(Fato[] alvos)
         {
-            return new Tuple<Fato, RespostaFatos, RespostaFatos, RespostaFatos, RespostaFatos>(null, null, null, null, null);
-        }*/
+            j_Data.ObjetivosAlvo.Clear();
+            j_Data.ObjetivosAlvo.AddRange(alvos);
+        }
 
+        public Regra[] ListarRegras()
+        {
+            return j_Data.regras.ToArray();
+        }
+
+        public void AdicionarRegra(Regra regra)
+        {
+            j_Data.regras.Add(regra);
+        }
+        
     }
 }

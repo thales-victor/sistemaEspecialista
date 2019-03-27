@@ -60,7 +60,8 @@ namespace Project.Estruturas
         public int Id;
         public string Nome;
         public List<Condicao> Condicao = new List<Condicao>();
-        public List<Objetivo> Objetivo = new List<Objetivo>();
+       // public List<Objetivo> Objetivo = new List<Objetivo>();
+        public List<CondicaoObjetivo> condicaoObjetivos = new List<CondicaoObjetivo>();
         public Regra(int id, string nome)
         {
             Id = id;
@@ -91,32 +92,51 @@ namespace Project.Estruturas
                 Resposta = r,
                 Primeiro = primeiro
             });
+        }
 
+        public void CondicaoObjetivo(Fato f, Operador o, Resposta r)
+        {
+            condicaoObjetivos.Add(new CondicaoObjetivo()
+            {
+                Fato = f,
+                Operador = o,
+                Resposta = r,
+            });
+        }
+
+        public CondicaoObjetivo[] ListarCondicaoObjetivos()
+        {
+            return condicaoObjetivos.ToArray();
         }
     }
 
-    public class Objetivo
+    
+    /*public class Objetivo
     {
         public int Id;
-        public string Nome;
-        public string Descricao;
+        //public List<Fato> Fatos = new List<Fato>();
 
-        public Objetivo(int id, string nome, string desc)
+        public Objetivo(int id/*, List<Fato> f)
         {
             Id = id;
-            Nome = nome;
-            Descricao = desc;
+            //Fatos = f;
         }
-    }
+    }*/
 
     public class Condicao
     {
-        //public int Id;
         public Conectivo Conectivo;
         public Fato Fato;
         public Operador Operador;
         public Resposta Resposta;
         public bool Primeiro;
+    }
+
+    public class CondicaoObjetivo
+    {
+        public Fato Fato;
+        public Operador Operador;
+        public Resposta Resposta;
     }
 
     public enum TipoResposta

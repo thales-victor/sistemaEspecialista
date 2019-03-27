@@ -15,7 +15,16 @@ namespace Project
         public AdicionarObjetivo()
         {
             InitializeComponent();
-            PopulateListBox();
+
+            FatoObjetivos.AddRange(Manager.instance.ListarFatos());
+
+            UpdateListBox();
+        }
+
+        void UpdateListBox()
+        {
+            PopulateListBoxObjetivos();
+            PopulateListBoxAlvo();
         }
 
         private void salvarObjetivo_btn_Click(object sender, EventArgs e)
@@ -25,33 +34,24 @@ namespace Project
 
         void SalvarObjetivo()
         {
-            var nome = nomeObjetivo_txtbox.Text;
-            if (nome != null || descObjetivo_txtbox.Text != null)
-            {
-                if (Manager.instance.ObterObjetivo(nome) == null)
-                {
-                    Manager.instance.CriarObjetivo(nomeObjetivo_txtbox.Text, descObjetivo_txtbox.Text); // nao existe
-                }
-                else
-                    MessageBox.Show("Objetivo já existe");//existe
-            }
-            else
-            {
-                MessageBox.Show("campos invalidos");//existe
-            }
-            PopulateListBox();
+            Manager.instance.AtualizarAlvos(ObjetivosAlvo.ToArray());
         }
 
-        void PopulateListBox()
+        void PopulateListBoxAlvo()
         {
-            list_Objetivos.DataSource = Manager.instance.ListarObjetivos();
+            objetivosAlvo_listbox.DataSource = ObjetivosAlvo.ToArray();
+        }
+
+        void PopulateListBoxObjetivos()
+        {
+            objetivos_listbox.DataSource = FatoObjetivos.ToArray();
         }
 
         private void list_Objetivos_Format(object sender, ListControlConvertEventArgs e)
         {
-            if (e.ListItem is Estruturas.Objetivo)
+            if (e.ListItem is Estruturas.Fato)
             {
-                e.Value = ((Estruturas.Objetivo)e.ListItem).Nome;
+                e.Value = ((Estruturas.Fato)e.ListItem).Nome;
             }
             else
             {
@@ -61,18 +61,50 @@ namespace Project
 
         private void btnRemover_Click(object sender, EventArgs e)
         {
-            var sel = list_Objetivos.SelectedIndex;
+            var sel = (Estruturas.Fato)objetivosAlvo_listbox.SelectedItem;
 
-            if(sel != -1)
-            {
-                Manager.instance.RemoverObjetivoIndex(sel);
-                PopulateListBox();
-            }
+            if (sel == null) return;
+
+            FatoObjetivos.Add(sel);
+            ObjetivosAlvo.Remove(sel);
+
+           // Manager.instance.RemoverAlvo(sel);
+
+            UpdateListBox();
+
         }
 
         private void cancelar_btn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void objetivos_listbox_Format(object sender, ListControlConvertEventArgs e)
+        {
+            if (e.ListItem is Estruturas.Fato)
+            {
+                e.Value = ((Estruturas.Fato)e.ListItem).Nome;
+            }
+            else
+            {
+                e.Value = "Item desconhecido";
+            }
+        }
+
+
+
+        private List<Estruturas.Fato> FatoObjetivos = new List<Estruturas.Fato>();
+        private List<Estruturas.Fato> ObjetivosAlvo = new List<Estruturas.Fato>();
+
+        private void addObjetivo_btn_Click(object sender, EventArgs e)
+        {
+            var alvo = (Estruturas.Fato)objetivos_listbox.SelectedItem;
+            if (alvo == null) return;
+
+            ObjetivosAlvo.Add(alvo);
+            FatoObjetivos.Remove(alvo);
+
+            UpdateListBox();
         }
     }
 }

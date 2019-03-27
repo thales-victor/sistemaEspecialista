@@ -48,7 +48,9 @@ namespace Project
         {
             var fatos = Manager.instance.ListarFatos();
             fato_combobox.DataSource = fatos.Select(x => x.Nome).ToArray();
-            fato_combobox.SelectedIndex = 0;
+
+            if (fato_combobox.Items.Count > 0)
+                fato_combobox.SelectedIndex = 0;
 
             CheckTipoRespostaNumerico(fatos[0]);
         }
@@ -119,6 +121,7 @@ namespace Project
             else
                 regra.AdicionarCondição(primeiraRegra, conectivo, fato, (Estruturas.Operador)operadorIndex, resposta);
 
+            regra.Save();//Salvar o ID da regra
 
             this.Close();
             

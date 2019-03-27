@@ -33,8 +33,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.criarObjetivo_btn = new System.Windows.Forms.Button();
             this.criarRegra_btn = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.regrasCriadas_listbox = new System.Windows.Forms.ListBox();
+            this.regrasCriadas_label = new System.Windows.Forms.Label();
             this.pnTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,24 +88,24 @@
             this.criarRegra_btn.UseVisualStyleBackColor = true;
             this.criarRegra_btn.Click += new System.EventHandler(this.criarRegra_btn_Click);
             // 
-            // button3
+            // regrasCriadas_listbox
             // 
-            this.button3.Location = new System.Drawing.Point(120, 275);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 59);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Configurar Objetivos";
-            this.button3.UseVisualStyleBackColor = true;
+            this.regrasCriadas_listbox.FormattingEnabled = true;
+            this.regrasCriadas_listbox.Location = new System.Drawing.Point(482, 184);
+            this.regrasCriadas_listbox.Name = "regrasCriadas_listbox";
+            this.regrasCriadas_listbox.Size = new System.Drawing.Size(120, 95);
+            this.regrasCriadas_listbox.TabIndex = 4;
+            this.regrasCriadas_listbox.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.regrasCriadas_listbox_Format);
             // 
-            // button4
+            // regrasCriadas_label
             // 
-            this.button4.Location = new System.Drawing.Point(377, 275);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 59);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Play";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.regrasCriadas_label.AutoSize = true;
+            this.regrasCriadas_label.ForeColor = System.Drawing.SystemColors.Control;
+            this.regrasCriadas_label.Location = new System.Drawing.Point(482, 165);
+            this.regrasCriadas_label.Name = "regrasCriadas_label";
+            this.regrasCriadas_label.Size = new System.Drawing.Size(78, 13);
+            this.regrasCriadas_label.TabIndex = 5;
+            this.regrasCriadas_label.Text = "Regras criadas";
             // 
             // frmMain
             // 
@@ -113,8 +113,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(679, 497);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.regrasCriadas_label);
+            this.Controls.Add(this.regrasCriadas_listbox);
             this.Controls.Add(this.criarRegra_btn);
             this.Controls.Add(this.criarObjetivo_btn);
             this.Controls.Add(this.button2);
@@ -126,6 +126,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.pnTop.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -136,8 +137,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button criarObjetivo_btn;
         private System.Windows.Forms.Button criarRegra_btn;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ListBox regrasCriadas_listbox;
+        private System.Windows.Forms.Label regrasCriadas_label;
     }
 }
 

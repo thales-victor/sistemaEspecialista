@@ -38,7 +38,6 @@ namespace Project
                         GerarRespostasUnivalorado();
                         listaResposta_label.Show();
                         listaResposta_listbox.Show();
-                        removerResposta_btn.Hide();
                     }
                     break;
                 case TipoResposta.Multivalorado:
@@ -51,7 +50,6 @@ namespace Project
                         resposta_label.Show();
                         listaResposta_label.Show();
                         listaResposta_listbox.Show();
-                        removerResposta_btn.Show();
                     }
                     break;
                 case TipoResposta.Numerico:
@@ -64,21 +62,15 @@ namespace Project
                         resposta_label.Show();
                         listaResposta_label.Hide();
                         listaResposta_listbox.Hide();
-                        removerResposta_btn.Hide();
                     }
                     break;
             }
-            AtualizaListBoxRespostas();
+            AtualizaListBox();
         }
 
-        private void AtualizaListBoxRespostas()
+        private void AtualizaListBox()
         {
             listaResposta_listbox.DataSource = Respostas.Select(o => o.Descricao).ToList();
-        }
-
-        private void AtualizaListBoxFatos()
-        {
-            fatos_listbox.DataSource = Manager.instance.ListarFatos().Select(o => o.Nome).ToList();
         }
 
         private void GerarRespostasUnivalorado()
@@ -92,14 +84,11 @@ namespace Project
 
         private void GerarRespostasNumerico()
         {
-            string min = resp_min_txtbox.Text;
-            string max = max_txtbox.Text;
+            var min = new Resposta(0, resp_min_txtbox.Text);
+            var max = new Resposta(1, max_txtbox.Text);
 
-            if (!string.IsNullOrEmpty(min) && !string.IsNullOrEmpty(max))
-            {
-                Respostas.Add(new Resposta(0, min));
-                Respostas.Add(new Resposta(1, max));
-            }
+            Respostas.Add(min);
+            Respostas.Add(max);
         }
 
 
@@ -118,11 +107,14 @@ namespace Project
             var nome = nomeFato_txtbox.Text;
             var tipo = BuscaTipoRespostaSelecionada();
 
-
+            if (tipo == TipoResposta.Numerico)
+            {
+                GerarRespostasNumerico();
+            }
 
             Manager.instance.CriarFato(nome, tipo.Value, Respostas);
-            AtualizaListBoxFatos();
-            Init();
+
+            FecharFormAdicionarFato();
         }
 
         public TipoResposta? BuscaTipoRespostaSelecionada()
@@ -147,7 +139,7 @@ namespace Project
             resp_min_txtbox.Text = string.Empty;
             resp_min_txtbox.Focus();
 
-            AtualizaListBoxRespostas();
+            AtualizaListBox();
         }
 
         public bool IsValid()
@@ -160,30 +152,19 @@ namespace Project
             if (tipo == null)
                 return false;
 
-            if (tipo == TipoResposta.Numerico)
-            {
-                GerarRespostasNumerico();
-            }
-
-            if (Respostas.Count == 0)
-                return false;
+            /*
+            if (Respostas.Count <= 0)
+                return false;*/
 
             return true;
-        }
-
-        private void Init()
-        {
-            nomeFato_txtbox.Text = string.Empty;
-            univalorada_radio.Checked = true;
-            AlteraRadio(TipoResposta.Univalorado);
-            AtualizaListBoxFatos();
         }
 
         #region --------------------- EVENTOS ---------------------
 
         private void AdicionarFato_Load(object sender, EventArgs e)
         {
-            Init();
+            univalorada_radio.Checked = true;
+            AlteraRadio(TipoResposta.Univalorado);
         }
 
         private void univalorada_radio_CheckedChanged(object sender, EventArgs e)
@@ -214,28 +195,7 @@ namespace Project
         {
             AdicionarResposta();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var sel = fatos_listbox.SelectedIndex;
-
-            if (sel != -1)
-            {
-                Manager.instance.RemoverFatoIndex(sel);
-                AtualizaListBoxFatos();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var sel = listaResposta_listbox.SelectedIndex;
-
-            if (sel != -1)
-            {
-                Respostas.RemoveAt(sel);
-                AtualizaListBoxRespostas();
-            }
-        }
         #endregion --------------------- EVENTOS ---------------------
+
     }
 }

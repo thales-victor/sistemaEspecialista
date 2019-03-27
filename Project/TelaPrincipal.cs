@@ -12,14 +12,16 @@ namespace Project
 {
     public partial class frmMain : Form
     {
-        private Manager mgr;
-
-        public frmMain(Manager manager)
+        public frmMain()
         {
-            this.mgr = manager;
             InitializeComponent();
 
-            
+            AtualizarRegrasCriadas();
+        }
+
+        void AtualizarRegrasCriadas()
+        {
+            regrasCriadas_listbox.DataSource = Manager.instance.ListarRegras();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,15 +31,8 @@ namespace Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*var fato = mgr.GetFatoById(1);
-            if(fato != null)
-            {
-                MessageBox.Show(fato.Nome);
-            }*/
             var addFato = new AdicionarFato();
             addFato.ShowDialog();
-
-           // mgr.CriarFato("NomeFato1", Estruturas.E_T_RespostaFato.UniValorado, "SIM");
         }
 
         private void criarObjetivo_btn_Click(object sender, EventArgs e)
@@ -50,26 +45,23 @@ namespace Project
         {
             var addRegra = new AdicionarRegra();
             addRegra.ShowDialog();
+
+            AtualizarRegrasCriadas();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void regrasCriadas_listbox_Format(object sender, ListControlConvertEventArgs e)
         {
-            var regras = Manager.instance.ListarRegras();
-            if (regras.Count == 0)
-                return;
-            var regra = regras.FirstOrDefault();
-            var condicoes = regra.Condicao;
-            if (condicoes.Count == 0)
-                return;
-
-            foreach (var condicao in condicoes)
+            if (e.ListItem is Estruturas.Regra)
             {
-                using (var perguntas = new Perguntas(condicao))
-                {
-                    perguntas.ShowDialog();
-                }
-            }
+                Estruturas.Regra regra = (Estruturas.Regra)e.ListItem;
 
+                e.Value = string.Format($"{regra.Nome}");
+
+            }
+            else
+            {
+                e.Value = "Item desconhecido";
+            }
         }
     }
 }

@@ -3,23 +3,33 @@
   "fatos": [
     {
       "Id": 0,
-      "Nome": "NomeFato1",
+      "Nome": "novofato",
       "Tipo": 0,
-      "Respostas": null
+      "Respostas": [
+        {
+          "Id": 1,
+          "Descricao": "Verdadeiro"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Falso"
+        }
+      ]
     }
   ],
-  "resposta_fatos_UltimoID": 1,
-  "resposta_UltimoID": 1,
-  "respostas": [
-    {
-      "Id": 0,
-      "Descricao": "SIM"
-    }
-  ],
+  "resposta_fatos_UltimoID": 0,
+  "resposta_UltimoID": 0,
+  "respostas": [],
   "regras_UltimoID": 0,
   "regras": [],
-  "objetivo_UltimoID": 0,
-  "objetivo": [],
+  "objetivo_UltimoID": 1,
+  "objetivo": [
+    {
+      "Id": 0,
+      "Nome": "objetivo",
+      "Descricao": "asdas"
+    }
+  ],
   "condição_UltimoID": 0,
   "condição": []
 }

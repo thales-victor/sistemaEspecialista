@@ -28,75 +28,111 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.nomeObjetivo_label = new System.Windows.Forms.Label();
+            this.descObjetivo_label = new System.Windows.Forms.Label();
+            this.nomeObjetivo_txtbox = new System.Windows.Forms.TextBox();
+            this.descObjetivo_txtbox = new System.Windows.Forms.TextBox();
+            this.salvarObjetivo_btn = new System.Windows.Forms.Button();
+            this.cancelar_btn = new System.Windows.Forms.Button();
+            this.list_Objetivos = new System.Windows.Forms.ListBox();
+            this.listaObjetivos_label = new System.Windows.Forms.Label();
+            this.btnRemover = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // nomeObjetivo_label
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(78, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nome";
+            this.nomeObjetivo_label.AutoSize = true;
+            this.nomeObjetivo_label.Location = new System.Drawing.Point(78, 62);
+            this.nomeObjetivo_label.Name = "nomeObjetivo_label";
+            this.nomeObjetivo_label.Size = new System.Drawing.Size(35, 13);
+            this.nomeObjetivo_label.TabIndex = 0;
+            this.nomeObjetivo_label.Text = "Nome";
             // 
-            // label2
+            // descObjetivo_label
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(78, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Descrição";
+            this.descObjetivo_label.AutoSize = true;
+            this.descObjetivo_label.Location = new System.Drawing.Point(78, 101);
+            this.descObjetivo_label.Name = "descObjetivo_label";
+            this.descObjetivo_label.Size = new System.Drawing.Size(55, 13);
+            this.descObjetivo_label.TabIndex = 1;
+            this.descObjetivo_label.Text = "Descrição";
             // 
-            // textBox1
+            // nomeObjetivo_txtbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(155, 55);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.nomeObjetivo_txtbox.Location = new System.Drawing.Point(155, 55);
+            this.nomeObjetivo_txtbox.Name = "nomeObjetivo_txtbox";
+            this.nomeObjetivo_txtbox.Size = new System.Drawing.Size(100, 20);
+            this.nomeObjetivo_txtbox.TabIndex = 2;
             // 
-            // textBox2
+            // descObjetivo_txtbox
             // 
-            this.textBox2.Location = new System.Drawing.Point(155, 98);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
+            this.descObjetivo_txtbox.Location = new System.Drawing.Point(155, 98);
+            this.descObjetivo_txtbox.Name = "descObjetivo_txtbox";
+            this.descObjetivo_txtbox.Size = new System.Drawing.Size(100, 20);
+            this.descObjetivo_txtbox.TabIndex = 3;
             // 
-            // button1
+            // salvarObjetivo_btn
             // 
-            this.button1.Location = new System.Drawing.Point(526, 347);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Salvar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.salvarObjetivo_btn.Location = new System.Drawing.Point(526, 347);
+            this.salvarObjetivo_btn.Name = "salvarObjetivo_btn";
+            this.salvarObjetivo_btn.Size = new System.Drawing.Size(75, 23);
+            this.salvarObjetivo_btn.TabIndex = 4;
+            this.salvarObjetivo_btn.Text = "Salvar";
+            this.salvarObjetivo_btn.UseVisualStyleBackColor = true;
+            this.salvarObjetivo_btn.Click += new System.EventHandler(this.salvarObjetivo_btn_Click);
             // 
-            // button2
+            // cancelar_btn
             // 
-            this.button2.Location = new System.Drawing.Point(669, 347);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cancelar_btn.Location = new System.Drawing.Point(669, 347);
+            this.cancelar_btn.Name = "cancelar_btn";
+            this.cancelar_btn.Size = new System.Drawing.Size(75, 23);
+            this.cancelar_btn.TabIndex = 5;
+            this.cancelar_btn.Text = "Cancelar";
+            this.cancelar_btn.UseVisualStyleBackColor = true;
+            this.cancelar_btn.Click += new System.EventHandler(this.cancelar_btn_Click);
+            // 
+            // list_Objetivos
+            // 
+            this.list_Objetivos.FormattingEnabled = true;
+            this.list_Objetivos.Location = new System.Drawing.Point(459, 55);
+            this.list_Objetivos.Name = "list_Objetivos";
+            this.list_Objetivos.Size = new System.Drawing.Size(296, 95);
+            this.list_Objetivos.TabIndex = 6;
+            this.list_Objetivos.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.list_Objetivos_Format);
+            // 
+            // listaObjetivos_label
+            // 
+            this.listaObjetivos_label.AutoSize = true;
+            this.listaObjetivos_label.Location = new System.Drawing.Point(456, 29);
+            this.listaObjetivos_label.Name = "listaObjetivos_label";
+            this.listaObjetivos_label.Size = new System.Drawing.Size(91, 13);
+            this.listaObjetivos_label.TabIndex = 7;
+            this.listaObjetivos_label.Text = "Lista de Objetivos";
+            // 
+            // btnRemover
+            // 
+            this.btnRemover.Location = new System.Drawing.Point(562, 166);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(75, 23);
+            this.btnRemover.TabIndex = 8;
+            this.btnRemover.Text = "Remover";
+            this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // AdicionarObjetivo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnRemover);
+            this.Controls.Add(this.listaObjetivos_label);
+            this.Controls.Add(this.list_Objetivos);
+            this.Controls.Add(this.cancelar_btn);
+            this.Controls.Add(this.salvarObjetivo_btn);
+            this.Controls.Add(this.descObjetivo_txtbox);
+            this.Controls.Add(this.nomeObjetivo_txtbox);
+            this.Controls.Add(this.descObjetivo_label);
+            this.Controls.Add(this.nomeObjetivo_label);
             this.Name = "AdicionarObjetivo";
             this.Text = "AdicionarObjetivo";
             this.ResumeLayout(false);
@@ -106,11 +142,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label nomeObjetivo_label;
+        private System.Windows.Forms.Label descObjetivo_label;
+        private System.Windows.Forms.TextBox nomeObjetivo_txtbox;
+        private System.Windows.Forms.TextBox descObjetivo_txtbox;
+        private System.Windows.Forms.Button salvarObjetivo_btn;
+        private System.Windows.Forms.Button cancelar_btn;
+        private System.Windows.Forms.ListBox list_Objetivos;
+        private System.Windows.Forms.Label listaObjetivos_label;
+        private System.Windows.Forms.Button btnRemover;
     }
 }

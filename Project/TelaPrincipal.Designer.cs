@@ -31,6 +31,8 @@
             this.pnTop = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.criarObjetivo_btn = new System.Windows.Forms.Button();
+            this.criarRegra_btn = new System.Windows.Forms.Button();
             this.pnTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,19 +52,39 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "Fechar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(364, 194);
+            this.button2.Location = new System.Drawing.Point(111, 108);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
-            this.button2.Text = "CRIAR";
+            this.button2.Text = "Fatos";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // criarObjetivo_btn
+            // 
+            this.criarObjetivo_btn.Location = new System.Drawing.Point(297, 108);
+            this.criarObjetivo_btn.Name = "criarObjetivo_btn";
+            this.criarObjetivo_btn.Size = new System.Drawing.Size(75, 23);
+            this.criarObjetivo_btn.TabIndex = 2;
+            this.criarObjetivo_btn.Text = "Objetivos";
+            this.criarObjetivo_btn.UseVisualStyleBackColor = true;
+            this.criarObjetivo_btn.Click += new System.EventHandler(this.criarObjetivo_btn_Click);
+            // 
+            // criarRegra_btn
+            // 
+            this.criarRegra_btn.Location = new System.Drawing.Point(482, 108);
+            this.criarRegra_btn.Name = "criarRegra_btn";
+            this.criarRegra_btn.Size = new System.Drawing.Size(75, 23);
+            this.criarRegra_btn.TabIndex = 3;
+            this.criarRegra_btn.Text = "Regras";
+            this.criarRegra_btn.UseVisualStyleBackColor = true;
+            this.criarRegra_btn.Click += new System.EventHandler(this.criarRegra_btn_Click);
             // 
             // frmMain
             // 
@@ -70,6 +92,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(679, 497);
+            this.Controls.Add(this.criarRegra_btn);
+            this.Controls.Add(this.criarObjetivo_btn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pnTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -87,6 +111,8 @@
         private System.Windows.Forms.Panel pnTop;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button criarObjetivo_btn;
+        private System.Windows.Forms.Button criarRegra_btn;
     }
 }
 

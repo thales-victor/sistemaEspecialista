@@ -39,5 +39,17 @@ namespace Project
 
            // mgr.CriarFato("NomeFato1", Estruturas.E_T_RespostaFato.UniValorado, "SIM");
         }
+
+        private void criarObjetivo_btn_Click(object sender, EventArgs e)
+        {
+            var addObjetivo = new AdicionarObjetivo();
+            addObjetivo.ShowDialog();
+        }
+
+        private void criarRegra_btn_Click(object sender, EventArgs e)
+        {
+            var addRegra = new AdicionarRegra();
+            addRegra.ShowDialog();
+        }
     }
 }

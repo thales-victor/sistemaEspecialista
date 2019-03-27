@@ -20,7 +20,6 @@ namespace Project
             public List<Fato> fatos;
 
             public int resposta_fatos_UltimoID;
-           // public List<RespostaFatos> resposta_Fatos;
 
             public int resposta_UltimoID;
             public List<Resposta> respostas;
@@ -34,9 +33,6 @@ namespace Project
             public int condição_UltimoID;
             public List<Condicao> condição;
 
-            //public int lista_condição_UltimoID;
-           // public List<ListaCondição> listaCondiçãos;
-
             public ToJSONData()
             {
                 Fatos_UltimoID = 0;
@@ -45,23 +41,26 @@ namespace Project
                 regras_UltimoID = 0;
                 objetivo_UltimoID = 0;
                 condição_UltimoID = 0;
-                //lista_condição_UltimoID = 0;
 
                 fatos = new List<Fato>();
-               // resposta_Fatos = new List<RespostaFatos>();
                 respostas = new List<Resposta>();
                 regras = new List<Regra>();
                 objetivo = new List<Objetivo>();
                 condição = new List<Condicao>();
-                //listaCondiçãos = new List<ListaCondição>();
             }
         }
 
+
+        public static Manager instance;
         public Manager()
         {
+            if(instance != null)
+            {
+                throw new Exception("Instancia Manager já existe!");
+            }
+            instance = this;
             j_Data = new ToJSONData();
             LoadAllData();
-            
         }
 
         public void SaveAllData()
@@ -69,25 +68,27 @@ namespace Project
             File.WriteAllText(DBName, JsonConvert.SerializeObject(j_Data, Formatting.Indented));
 
         }
+
         public void LoadAllData()
         {
             if (File.Exists(DBName))
                 j_Data = JsonConvert.DeserializeObject<ToJSONData>(File.ReadAllText(DBName));
             else
                 SaveAllData();
-
         }
 
 
         public Fato GetFatoById(int id)
         {
-            return j_Data.fatos.Where(x => x.Id == id).First();
-        }
+            if (j_Data.fatos.Count == 0)
+                return null;
 
-        //public List<Resposta> GetRespostaFatosById(int id)
-        //{
-        //    return j_Data.resposta_Fatos.Where(x => x.id == id).First();
-        //}
+            var returnvalue = j_Data.fatos.Where(x => x.Id == id);
+            if (returnvalue.Count() == 0)
+                return null;
+
+            return returnvalue.First();
+        }
 
 
         public Fato CriarFato(string nome, TipoResposta tipo, List<Resposta> respostas)
@@ -96,17 +97,38 @@ namespace Project
             j_Data.fatos.Add(fato);
 
             SaveAllData();
-
-
-            //var r_fato = new RespostaFatos(j_Data.resposta_fatos_UltimoID++, fato.Id, tipo);
-            //j_Data.resposta_Fatos.Add(r_fato);
-
-            //var list_r = new Resposta(j_Data.resposta_UltimoID++, r_fato.id, resposta);
-            //j_Data.respostas.Add(list_r);
-
             return fato;
         }
 
+        public Objetivo ObterObjetivo(string nome)
+        {
+            if (j_Data.objetivo.Count == 0)
+                return null;
+
+            var returnvalue = j_Data.objetivo.Where(x => x.Nome == nome);
+            if (returnvalue.Count() == 0)
+                return null;
+
+            return returnvalue.First();
+        }
+        public void CriarObjetivo(string nome, string desc)
+        {
+            j_Data.objetivo.Add(new Objetivo(j_Data.objetivo_UltimoID++, nome, desc));
+            SaveAllData();
+        }
+
+        public void RemoverObjetivoIndex(int index)
+        {
+            if(j_Data.objetivo[index] != null)
+                j_Data.objetivo.Remove(j_Data.objetivo[index]);
+
+            SaveAllData();
+        }
+
+        public Objetivo[] ListarObjetivos()
+        {
+            return j_Data.objetivo.ToArray();
+        }
 
         /*
         private Tuple<Fato, RespostaFatos, RespostaFatos, RespostaFatos, RespostaFatos> teste()

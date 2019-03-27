@@ -262,7 +262,7 @@
             this.Controls.Add(this.nomeFato_txtbox);
             this.Controls.Add(this.nomeFato_label);
             this.Name = "AdicionarFato";
-            this.Text = "Form1";
+            this.Text = "Fatos";
             this.Load += new System.EventHandler(this.AdicionarFato_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

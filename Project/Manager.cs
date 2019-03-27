@@ -32,7 +32,7 @@ namespace Project
             public List<Objetivo> objetivo;
 
             public int condição_UltimoID;
-            public List<Condição> condição;
+            public List<Condicao> condição;
 
             //public int lista_condição_UltimoID;
            // public List<ListaCondição> listaCondiçãos;
@@ -52,7 +52,7 @@ namespace Project
                 respostas = new List<Resposta>();
                 regras = new List<Regra>();
                 objetivo = new List<Objetivo>();
-                condição = new List<Condição>();
+                condição = new List<Condicao>();
                 //listaCondiçãos = new List<ListaCondição>();
             }
         }
@@ -90,7 +90,7 @@ namespace Project
         //}
 
 
-        public Fato CriarFato(string nome, E_T_RespostaFato tipo, List<Resposta> respostas)
+        public Fato CriarFato(string nome, TipoResposta tipo, List<Resposta> respostas)
         {
             var fato = new Fato(j_Data.Fatos_UltimoID++, nome, tipo, respostas);
             j_Data.fatos.Add(fato);

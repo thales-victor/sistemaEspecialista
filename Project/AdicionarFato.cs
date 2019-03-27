@@ -21,12 +21,12 @@ namespace Project
             InitializeComponent();
         }
 
-        private void AlteraRadio(E_T_RespostaFato opcao)
+        private void AlteraRadio(TipoResposta opcao)
         {
             Respostas.Clear();
             switch (opcao)
             {
-                case E_T_RespostaFato.Univalorado:
+                case TipoResposta.Univalorado:
                     {
                         min_label.Hide();
                         max_label.Hide();
@@ -37,7 +37,7 @@ namespace Project
                         GerarRespostasUnivalorado();
                     }
                     break;
-                case E_T_RespostaFato.Multivalorado:
+                case TipoResposta.Multivalorado:
                     {
                         min_label.Hide();
                         max_label.Hide();
@@ -47,7 +47,7 @@ namespace Project
                         resposta_label.Show();
                     }
                     break;
-                case E_T_RespostaFato.Numerico:
+                case TipoResposta.Numerico:
                     {
                         min_label.Show();
                         max_label.Show();
@@ -58,7 +58,7 @@ namespace Project
                     }
                     break;
             }
-            listaResposta_listbox.DataSource = Respostas.Select(o => o.desc).ToList();
+            listaResposta_listbox.DataSource = Respostas.Select(o => o.Descricao).ToList();
         }
 
         private void GerarRespostasUnivalorado()
@@ -85,14 +85,14 @@ namespace Project
             manager.CriarFato(nome, tipo, Respostas);
         }
 
-        public E_T_RespostaFato BuscaTipoRespostaSelecionada()
+        public TipoResposta BuscaTipoRespostaSelecionada()
         {
             if (univalorada_radio.Checked)
-                return E_T_RespostaFato.Univalorado;
+                return TipoResposta.Univalorado;
             else if (multivalorada_radio.Checked)
-                return E_T_RespostaFato.Multivalorado;
+                return TipoResposta.Multivalorado;
             else
-                return E_T_RespostaFato.Numerico;
+                return TipoResposta.Numerico;
         }
 
         #region --------------------- EVENTOS ---------------------
@@ -100,22 +100,22 @@ namespace Project
         private void AdicionarFato_Load(object sender, EventArgs e)
         {
             univalorada_radio.Checked = true;
-            AlteraRadio(E_T_RespostaFato.Univalorado);
+            AlteraRadio(TipoResposta.Univalorado);
         }
 
         private void univalorada_radio_CheckedChanged(object sender, EventArgs e)
         {
-            AlteraRadio(E_T_RespostaFato.Univalorado);
+            AlteraRadio(TipoResposta.Univalorado);
         }
 
         private void multivalorada_radio_CheckedChanged(object sender, EventArgs e)
         {
-            AlteraRadio(E_T_RespostaFato.Multivalorado);
+            AlteraRadio(TipoResposta.Multivalorado);
         }
 
         private void numerica_radio_CheckedChanged(object sender, EventArgs e)
         {
-            AlteraRadio(E_T_RespostaFato.Numerico);
+            AlteraRadio(TipoResposta.Numerico);
         }
 
         private void cancelar_btn_Click(object sender, EventArgs e)

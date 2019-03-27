@@ -13,9 +13,9 @@ namespace Project.Estruturas
     {
         public int Id;
         public string Nome;
-        public E_T_RespostaFato Tipo;
+        public TipoResposta Tipo;
         public List<Resposta> Respostas;
-        public Fato(int id, string nome, E_T_RespostaFato tipo, List<Resposta> respostas)
+        public Fato(int id, string nome, TipoResposta tipo, List<Resposta> respostas)
         {
             Nome = nome;
             Id = id;
@@ -26,63 +26,58 @@ namespace Project.Estruturas
 
     public class Resposta
     {
-        public int id;
-        public string desc;
+        public int Id;
+        public string Descricao;
 
         public Resposta(int id, string desc)
         {
-            this.id = id;
-            this.desc = desc;
+            this.Id = id;
+            this.Descricao = desc;
         }
     }
 
-    public enum E_T_RespostaFato
+    public class Regra
+    {
+        public int Id;
+        public string Nome;
+        public List<Condicao> Condicao;
+        public List<Objetivo> Objetivo;
+        public Regra(int id, string nome)
+        {
+            Id = id;
+            Nome = nome;
+        }
+    }
+
+    public class Objetivo
+    {
+        public int Id;
+        public string Nome;
+        public string Descricao;
+
+        public Objetivo(int id, string nome, string desc)
+        {
+            Id = id;
+            Nome = nome;
+            Descricao = desc;
+        }
+    }
+
+    public class Condicao
+    {
+        public int Id;
+        public Conectivo Conectivo;
+        public Fato Fato;
+        public Operador Operador;
+        public Resposta Resposta;
+    }
+
+    public enum TipoResposta
     {
         Univalorado,
         Multivalorado,
         Numerico,
     }
-
-
-    public class Regra
-    {
-        public int id;
-        public string nome;
-        public List<Condição> Condição;
-        public List<Objetivo> Objetivo;
-        public Regra(int id, string nome)
-        {
-            this.id = id;
-            this.nome = nome;
-        }
-    }
-
-
-    public class Objetivo
-    {
-        public int id;
-        public string nome;
-        public string desc;
-
-        public Objetivo(int id, string nome, string desc)
-        {
-            this.id = id;
-            this.nome = nome;
-            this.desc = desc;
-        }
-    }
-
-
-    public class Condição
-    {
-        public int id;
-        public Conectivo con;
-        public Fato Fato;
-        public Operador operador;
-        public Resposta Resposta;
-    }
-
-
 
     public enum Conectivo
     {

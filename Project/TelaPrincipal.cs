@@ -28,28 +28,21 @@ namespace Project
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
-            /*var fato = mgr.GetFatoById(1);
-            if(fato != null)
-            {
-                MessageBox.Show(fato.Nome);
-            }*/
-            var addFato = new AdicionarFato();
-            addFato.ShowDialog();
-
-           // mgr.CriarFato("NomeFato1", Estruturas.E_T_RespostaFato.UniValorado, "SIM");
+        { 
+            var fatos = new ListaFatos();
+            fatos.ShowDialog();
         }
 
         private void criarObjetivo_btn_Click(object sender, EventArgs e)
         {
-            var addObjetivo = new AdicionarObjetivo();
-            addObjetivo.ShowDialog();
+            var objetivos = new ListaObjetivos();
+            objetivos.ShowDialog();
         }
 
         private void criarRegra_btn_Click(object sender, EventArgs e)
         {
-            var addRegra = new AdicionarRegra();
-            addRegra.ShowDialog();
+            var regras = new ListaRegras();
+            regras.ShowDialog();
         }
     }
 }

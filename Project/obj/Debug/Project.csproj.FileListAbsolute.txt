@@ -49,3 +49,6 @@ C:\Users\Victor\Desktop\Nova pasta\sistemaEspecialista-master\Project\obj\Debug\
 C:\Users\Victor\Desktop\Nova pasta\sistemaEspecialista-master\Project\obj\Debug\Project.csproj.CopyComplete
 C:\Users\Victor\Desktop\Nova pasta\sistemaEspecialista-master\Project\obj\Debug\Project.exe
 C:\Users\Victor\Desktop\Nova pasta\sistemaEspecialista-master\Project\obj\Debug\Project.pdb
+C:\Workdir\TabalhoIA\sistemaEspecialista\Project\obj\Debug\Project.ListaFatos.resources
+C:\Workdir\TabalhoIA\sistemaEspecialista\Project\obj\Debug\Project.ListaObjetivos.resources
+C:\Workdir\TabalhoIA\sistemaEspecialista\Project\obj\Debug\Project.ListaRegras.resources

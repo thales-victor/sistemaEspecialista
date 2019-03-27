@@ -1,0 +1,32 @@
+{
+  "Fatos_UltimoID": 1,
+  "fatos": [
+    {
+      "id": 0,
+      "Nome": "NomeFato1"
+    }
+  ],
+  "resposta_fatos_UltimoID": 1,
+  "resposta_Fatos": [
+    {
+      "Tipo": 0,
+      "id": 0
+    }
+  ],
+  "resposta_UltimoID": 1,
+  "respostas": [
+    {
+      "id": 0,
+      "id_resposta": 0,
+      "desc": "SIM"
+    }
+  ],
+  "regras_UltimoID": 0,
+  "regras": [],
+  "objetivo_UltimoID": 0,
+  "objetivo": [],
+  "condição_UltimoID": 0,
+  "condição": [],
+  "lista_condição_UltimoID": 0,
+  "listaCondiçãos": []
+}

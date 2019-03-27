@@ -1,0 +1,17 @@
+C:\Users\Victor\Desktop\Project\Project\bin\Debug\Project.exe.config
+C:\Users\Victor\Desktop\Project\Project\bin\Debug\Project.exe
+C:\Users\Victor\Desktop\Project\Project\bin\Debug\Project.pdb
+C:\Users\Victor\Desktop\Project\Project\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Victor\Desktop\Project\Project\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Victor\Desktop\Project\Project\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.csprojAssemblyReference.cache
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.frmMain.resources
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.Properties.Resources.resources
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.csproj.GenerateResource.cache
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.csproj.CopyComplete
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.exe
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.pdb
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.AdicionarFato.resources
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.AdicionarObjetivo.resources
+C:\Users\Victor\Desktop\Project\Project\obj\Debug\Project.AdicionarRegra.resources

@@ -2,22 +2,17 @@
   "Fatos_UltimoID": 1,
   "fatos": [
     {
-      "id": 0,
-      "Nome": "NomeFato1"
+      "Id": 0,
+      "Nome": "NomeFato1",
+      "Tipo": 0,
+      "Respostas": null
     }
   ],
   "resposta_fatos_UltimoID": 1,
-  "resposta_Fatos": [
-    {
-      "Tipo": 0,
-      "id": 0
-    }
-  ],
   "resposta_UltimoID": 1,
   "respostas": [
     {
       "id": 0,
-      "id_resposta": 0,
       "desc": "SIM"
     }
   ],
@@ -26,7 +21,5 @@
   "objetivo_UltimoID": 0,
   "objetivo": [],
   "condição_UltimoID": 0,
-  "condição": [],
-  "lista_condição_UltimoID": 0,
-  "listaCondiçãos": []
+  "condição": []
 }

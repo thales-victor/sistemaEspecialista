@@ -93,6 +93,7 @@
             this.multivalorada_radio.TabStop = true;
             this.multivalorada_radio.Text = "Multivalorada";
             this.multivalorada_radio.UseVisualStyleBackColor = true;
+            this.multivalorada_radio.CheckedChanged += new System.EventHandler(this.multivalorada_radio_CheckedChanged);
             // 
             // numerica_radio
             // 
@@ -104,6 +105,7 @@
             this.numerica_radio.TabStop = true;
             this.numerica_radio.Text = "Numérica";
             this.numerica_radio.UseVisualStyleBackColor = true;
+            this.numerica_radio.CheckedChanged += new System.EventHandler(this.numerica_radio_CheckedChanged);
             // 
             // resp_min_txtbox
             // 
@@ -172,6 +174,7 @@
             this.salvarFato_btn.TabIndex = 13;
             this.salvarFato_btn.Text = "Salvar";
             this.salvarFato_btn.UseVisualStyleBackColor = true;
+            this.salvarFato_btn.Click += new System.EventHandler(this.salvarFato_btn_Click);
             // 
             // listaResposta_listbox
             // 
@@ -189,6 +192,7 @@
             this.cancelar_btn.TabIndex = 15;
             this.cancelar_btn.Text = "Cancelar";
             this.cancelar_btn.UseVisualStyleBackColor = true;
+            this.cancelar_btn.Click += new System.EventHandler(this.cancelar_btn_Click);
             // 
             // AdicionarFato
             // 

@@ -11,14 +11,16 @@ namespace Project.Estruturas
      */
     public class Fato
     {
-        public int id;
+        public int Id;
         public string Nome;
         public E_T_RespostaFato Tipo;
         public List<Resposta> Respostas;
-        public Fato(int id, string nome)
+        public Fato(int id, string nome, E_T_RespostaFato tipo, List<Resposta> respostas)
         {
             Nome = nome;
-            this.id = id;
+            Id = id;
+            Tipo = tipo;
+            Respostas = respostas;
         }
     }
 

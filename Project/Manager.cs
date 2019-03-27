@@ -81,26 +81,26 @@ namespace Project
 
         public Fato GetFatoById(int id)
         {
-            return j_Data.fatos.Where(x => x.id == id).First();
+            return j_Data.fatos.Where(x => x.Id == id).First();
         }
 
-        public List<Resposta> GetRespostaFatosById(int id)
-        {
-            return j_Data.resposta_Fatos.Where(x => x.id == id).First();
-        }
+        //public List<Resposta> GetRespostaFatosById(int id)
+        //{
+        //    return j_Data.resposta_Fatos.Where(x => x.id == id).First();
+        //}
 
 
-        public Fato CriarFato(string nome, E_T_RespostaFato tipo, string resposta)
+        public Fato CriarFato(string nome, E_T_RespostaFato tipo, List<Resposta> respostas)
         {
-            var fato = new Fato(j_Data.Fatos_UltimoID++, nome);
+            var fato = new Fato(j_Data.Fatos_UltimoID++, nome, tipo, respostas);
             j_Data.fatos.Add(fato);
 
 
-            var r_fato = new RespostaFatos(j_Data.resposta_fatos_UltimoID++, fato.id, tipo);
-            j_Data.resposta_Fatos.Add(r_fato);
+            //var r_fato = new RespostaFatos(j_Data.resposta_fatos_UltimoID++, fato.Id, tipo);
+            //j_Data.resposta_Fatos.Add(r_fato);
 
-            var list_r = new Resposta(j_Data.resposta_UltimoID++, r_fato.id, resposta);
-            j_Data.respostas.Add(list_r);
+            //var list_r = new Resposta(j_Data.resposta_UltimoID++, r_fato.id, resposta);
+            //j_Data.respostas.Add(list_r);
 
             return fato;
         }

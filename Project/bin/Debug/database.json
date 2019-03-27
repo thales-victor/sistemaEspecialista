@@ -12,8 +12,8 @@
   "resposta_UltimoID": 1,
   "respostas": [
     {
-      "id": 0,
-      "desc": "SIM"
+      "Id": 0,
+      "Descricao": "SIM"
     }
   ],
   "regras_UltimoID": 0,

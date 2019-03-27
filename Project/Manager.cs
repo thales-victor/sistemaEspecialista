@@ -95,6 +95,8 @@ namespace Project
             var fato = new Fato(j_Data.Fatos_UltimoID++, nome, tipo, respostas);
             j_Data.fatos.Add(fato);
 
+            SaveAllData();
+
 
             //var r_fato = new RespostaFatos(j_Data.resposta_fatos_UltimoID++, fato.Id, tipo);
             //j_Data.resposta_Fatos.Add(r_fato);

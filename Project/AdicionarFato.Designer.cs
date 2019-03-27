@@ -122,6 +122,7 @@
             this.addResposta_btn.TabIndex = 7;
             this.addResposta_btn.Text = "Adicionar";
             this.addResposta_btn.UseVisualStyleBackColor = true;
+            this.addResposta_btn.Click += new System.EventHandler(this.addResposta_btn_Click);
             // 
             // resposta_label
             // 

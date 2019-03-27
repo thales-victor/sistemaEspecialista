@@ -79,6 +79,12 @@
     <Compile Include="NovoObjetivo.Designer.cs">
       <DependentUpon>NovoObjetivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Perguntas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Perguntas.Designer.cs">
+      <DependentUpon>Perguntas.cs</DependentUpon>
+    </Compile>
     <Compile Include="TelaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NovoObjetivo.resx">
       <DependentUpon>NovoObjetivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Perguntas.resx">
+      <DependentUpon>Perguntas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TelaPrincipal.resx">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>

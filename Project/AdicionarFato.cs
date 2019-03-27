@@ -21,7 +21,7 @@ namespace Project
             InitializeComponent();
         }
 
-        
+
         private void AlteraRadio(TipoResposta opcao)
         {
             Respostas.Clear();
@@ -38,6 +38,7 @@ namespace Project
                         GerarRespostasUnivalorado();
                         listaResposta_label.Show();
                         listaResposta_listbox.Show();
+                        removerResposta_btn.Hide();
                     }
                     break;
                 case TipoResposta.Multivalorado:
@@ -50,6 +51,7 @@ namespace Project
                         resposta_label.Show();
                         listaResposta_label.Show();
                         listaResposta_listbox.Show();
+                        removerResposta_btn.Show();
                     }
                     break;
                 case TipoResposta.Numerico:
@@ -62,15 +64,21 @@ namespace Project
                         resposta_label.Show();
                         listaResposta_label.Hide();
                         listaResposta_listbox.Hide();
+                        removerResposta_btn.Hide();
                     }
                     break;
             }
-            AtualizaListBox();
+            AtualizaListBoxRespostas();
         }
 
-        private void AtualizaListBox()
+        private void AtualizaListBoxRespostas()
         {
             listaResposta_listbox.DataSource = Respostas.Select(o => o.Descricao).ToList();
+        }
+
+        private void AtualizaListBoxFatos()
+        {
+            listaFatos_listbox.DataSource = Manager.instance.ListarFatos().Select(o => o.Nome).ToList();
         }
 
         private void GerarRespostasUnivalorado()
@@ -84,11 +92,14 @@ namespace Project
 
         private void GerarRespostasNumerico()
         {
-            var min = new Resposta(0, resp_min_txtbox.Text);
-            var max = new Resposta(1, max_txtbox.Text);
+            string min = resp_min_txtbox.Text;
+            string max = max_txtbox.Text;
 
-            Respostas.Add(min);
-            Respostas.Add(max);
+            if (!string.IsNullOrEmpty(min) && !string.IsNullOrEmpty(max))
+            {
+                Respostas.Add(new Resposta(0, min));
+                Respostas.Add(new Resposta(1, max));
+            }
         }
 
 
@@ -107,14 +118,11 @@ namespace Project
             var nome = nomeFato_txtbox.Text;
             var tipo = BuscaTipoRespostaSelecionada();
 
-            if (tipo == TipoResposta.Numerico)
-            {
-                GerarRespostasNumerico();
-            }
+
 
             Manager.instance.CriarFato(nome, tipo.Value, Respostas);
-
-            FecharFormAdicionarFato();
+            AtualizaListBoxFatos();
+            Init();
         }
 
         public TipoResposta? BuscaTipoRespostaSelecionada()
@@ -139,7 +147,7 @@ namespace Project
             resp_min_txtbox.Text = string.Empty;
             resp_min_txtbox.Focus();
 
-            AtualizaListBox();
+            AtualizaListBoxRespostas();
         }
 
         public bool IsValid()
@@ -152,19 +160,30 @@ namespace Project
             if (tipo == null)
                 return false;
 
-            /*
-            if (Respostas.Count <= 0)
-                return false;*/
+            if (tipo == TipoResposta.Numerico)
+            {
+                GerarRespostasNumerico();
+            }
+
+            if (Respostas.Count == 0)
+                return false;
 
             return true;
+        }
+
+        private void Init()
+        {
+            nomeFato_txtbox.Text = string.Empty;
+            univalorada_radio.Checked = true;
+            AlteraRadio(TipoResposta.Univalorado);
+            AtualizaListBoxFatos();
         }
 
         #region --------------------- EVENTOS ---------------------
 
         private void AdicionarFato_Load(object sender, EventArgs e)
         {
-            univalorada_radio.Checked = true;
-            AlteraRadio(TipoResposta.Univalorado);
+            Init();
         }
 
         private void univalorada_radio_CheckedChanged(object sender, EventArgs e)
@@ -195,7 +214,28 @@ namespace Project
         {
             AdicionarResposta();
         }
-        #endregion --------------------- EVENTOS ---------------------
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var sel = listaFatos_listbox.SelectedIndex;
+
+            if (sel != -1)
+            {
+                Manager.instance.RemoverFatoIndex(sel);
+                AtualizaListBoxFatos();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var sel = listaResposta_listbox.SelectedIndex;
+
+            if (sel != -1)
+            {
+                Respostas.RemoveAt(sel);
+                AtualizaListBoxRespostas();
+            }
+        }
+        #endregion --------------------- EVENTOS ---------------------
     }
 }

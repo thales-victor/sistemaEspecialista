@@ -124,6 +124,13 @@ namespace Project
         {
             j_Data.regras.Add(regra);
         }
-        
+
+        public void RemoverFatoIndex(int index)
+        {
+            if (j_Data.fatos[index] != null)
+                j_Data.fatos.Remove(j_Data.fatos[index]);
+
+            SaveAllData();
+        }
     }
 }

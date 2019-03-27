@@ -21,6 +21,7 @@ namespace Project
             InitializeComponent();
         }
 
+        
         private void AlteraRadio(TipoResposta opcao)
         {
             Respostas.Clear();
@@ -74,8 +75,8 @@ namespace Project
 
         private void GerarRespostasUnivalorado()
         {
-            var verdadeiro = new Resposta(1, "Verdadeiro");
-            var falso = new Resposta(2, "Falso");
+            var verdadeiro = new Resposta(0, "Verdadeiro");
+            var falso = new Resposta(1, "Falso");
 
             Respostas.Add(verdadeiro);
             Respostas.Add(falso);
@@ -83,8 +84,8 @@ namespace Project
 
         private void GerarRespostasNumerico()
         {
-            var min = new Resposta(1, resp_min_txtbox.Text);
-            var max = new Resposta(2, max_txtbox.Text);
+            var min = new Resposta(0, resp_min_txtbox.Text);
+            var max = new Resposta(1, max_txtbox.Text);
 
             Respostas.Add(min);
             Respostas.Add(max);
@@ -132,7 +133,9 @@ namespace Project
         {
             int id = Respostas.Count + 1;
             string desc = resp_min_txtbox.Text;
+
             Respostas.Add(new Resposta(id, desc));
+
             resp_min_txtbox.Text = string.Empty;
             resp_min_txtbox.Focus();
 
@@ -143,11 +146,15 @@ namespace Project
         {
             if (string.IsNullOrEmpty(nomeFato_txtbox.Text))
                 return false;
+
             var tipo = BuscaTipoRespostaSelecionada();
+
             if (tipo == null)
                 return false;
+
+            /*
             if (Respostas.Count <= 0)
-                return false;
+                return false;*/
 
             return true;
         }

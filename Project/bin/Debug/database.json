@@ -3,23 +3,25 @@
   "fatos": [
     {
       "Id": 0,
-      "Nome": "novofato",
-      "Tipo": 0,
+      "Nome": "num1",
+      "Tipo": 2,
       "Respostas": [
         {
-          "Id": 1,
-          "Descricao": "Verdadeiro"
+          "Id": 0,
+          "Descricao": "5",
+          "Valor": 0,
+          "Numerico": false
         },
         {
-          "Id": 2,
-          "Descricao": "Falso"
+          "Id": 1,
+          "Descricao": "20",
+          "Valor": 0,
+          "Numerico": false
         }
       ]
     }
   ],
   "resposta_fatos_UltimoID": 0,
-  "resposta_UltimoID": 0,
-  "respostas": [],
   "regras_UltimoID": 0,
   "regras": [
     {
@@ -88,8 +90,8 @@
   "objetivo": [
     {
       "Id": 0,
-      "Nome": "objetivo",
-      "Descricao": "asdas"
+      "Nome": "objetivo1",
+      "Descricao": "12312"
     }
   ],
   "condição_UltimoID": 0,

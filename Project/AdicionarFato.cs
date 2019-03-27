@@ -103,8 +103,6 @@ namespace Project
                 MessageBox.Show("Preencha corretamente os campos para poder salvar!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            var manager = new Manager();
             var nome = nomeFato_txtbox.Text;
             var tipo = BuscaTipoRespostaSelecionada();
 
@@ -113,7 +111,7 @@ namespace Project
                 GerarRespostasNumerico();
             }
 
-            manager.CriarFato(nome, tipo.Value, Respostas);
+            Manager.instance.CriarFato(nome, tipo.Value, Respostas);
 
             FecharFormAdicionarFato();
         }

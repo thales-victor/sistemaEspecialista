@@ -38,6 +38,7 @@ namespace Project
                         GerarRespostasUnivalorado();
                         listaResposta_label.Show();
                         listaResposta_listbox.Show();
+                        removerResposta_btn.Hide();
                     }
                     break;
                 case TipoResposta.Multivalorado:
@@ -50,6 +51,7 @@ namespace Project
                         resposta_label.Show();
                         listaResposta_label.Show();
                         listaResposta_listbox.Show();
+                        removerResposta_btn.Show();
                     }
                     break;
                 case TipoResposta.Numerico:
@@ -62,6 +64,7 @@ namespace Project
                         resposta_label.Show();
                         listaResposta_label.Hide();
                         listaResposta_listbox.Hide();
+                        removerResposta_btn.Hide();
                     }
                     break;
             }
@@ -89,11 +92,14 @@ namespace Project
 
         private void GerarRespostasNumerico()
         {
-            var min = new Resposta(0, resp_min_txtbox.Text);
-            var max = new Resposta(1, max_txtbox.Text);
+            string min = resp_min_txtbox.Text;
+            string max = max_txtbox.Text;
 
-            Respostas.Add(min);
-            Respostas.Add(max);
+            if (!string.IsNullOrEmpty(min) && !string.IsNullOrEmpty(max))
+            {
+                Respostas.Add(new Resposta(0, min));
+                Respostas.Add(new Resposta(1, max));
+            }
         }
 
 
@@ -112,10 +118,7 @@ namespace Project
             var nome = nomeFato_txtbox.Text;
             var tipo = BuscaTipoRespostaSelecionada();
 
-            if (tipo == TipoResposta.Numerico)
-            {
-                GerarRespostasNumerico();
-            }
+
 
             Manager.instance.CriarFato(nome, tipo.Value, Respostas);
             AtualizaListBoxFatos();
@@ -157,9 +160,13 @@ namespace Project
             if (tipo == null)
                 return false;
 
-            /*
-            if (Respostas.Count <= 0)
-                return false;*/
+            if (tipo == TipoResposta.Numerico)
+            {
+                GerarRespostasNumerico();
+            }
+
+            if (Respostas.Count == 0)
+                return false;
 
             return true;
         }
@@ -216,6 +223,17 @@ namespace Project
             {
                 Manager.instance.RemoverFatoIndex(sel);
                 AtualizaListBoxFatos();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var sel = listaResposta_listbox.SelectedIndex;
+
+            if (sel != -1)
+            {
+                Respostas.RemoveAt(sel);
+                AtualizaListBoxRespostas();
             }
         }
         #endregion --------------------- EVENTOS ---------------------

@@ -47,6 +47,7 @@
             this.lista_fatos_label = new System.Windows.Forms.Label();
             this.fatos_listbox = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.removerResposta_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nomeFato_label
@@ -225,11 +226,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // removerResposta_btn
+            // 
+            this.removerResposta_btn.Location = new System.Drawing.Point(318, 340);
+            this.removerResposta_btn.Name = "removerResposta_btn";
+            this.removerResposta_btn.Size = new System.Drawing.Size(75, 23);
+            this.removerResposta_btn.TabIndex = 19;
+            this.removerResposta_btn.Text = "Remover";
+            this.removerResposta_btn.UseVisualStyleBackColor = true;
+            this.removerResposta_btn.Click += new System.EventHandler(this.button2_Click);
+            // 
             // AdicionarFato
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.removerResposta_btn);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.fatos_listbox);
             this.Controls.Add(this.lista_fatos_label);
@@ -278,5 +290,6 @@
         private System.Windows.Forms.Label lista_fatos_label;
         private System.Windows.Forms.ListBox fatos_listbox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button removerResposta_btn;
     }
 }

@@ -21,8 +21,8 @@ namespace Project
 
             public int resposta_fatos_UltimoID;
 
-            public int resposta_UltimoID;
-            public List<Resposta> respostas;
+            /*public int resposta_UltimoID;
+            public List<Resposta> respostas;*/
 
             public int regras_UltimoID;
             public List<Regra> regras;
@@ -37,19 +37,24 @@ namespace Project
             {
                 Fatos_UltimoID = 0;
                 resposta_fatos_UltimoID = 0;
-                resposta_UltimoID = 0;
+                //resposta_UltimoID = 0;
                 regras_UltimoID = 0;
                 objetivo_UltimoID = 0;
                 condição_UltimoID = 0;
 
                 fatos = new List<Fato>();
-                respostas = new List<Resposta>();
+                //-respostas = new List<Resposta>();
                 regras = new List<Regra>();
                 objetivo = new List<Objetivo>();
                 condição = new List<Condicao>();
             }
         }
 
+
+        public int IncrementRegraIndex()
+        {
+            return j_Data.regras_UltimoID++;
+        }
 
         public static Manager instance;
         public Manager()
@@ -129,6 +134,16 @@ namespace Project
         {
             return j_Data.objetivo.ToArray();
         }
+
+        public Fato[] ListarFatos()
+        {
+            return j_Data.fatos.ToArray();
+        }
+
+        /*public Resposta[] ListarRespostas()
+        {
+            return j_Data.respostas.ToArray();
+        }*/
 
         /*
         private Tuple<Fato, RespostaFatos, RespostaFatos, RespostaFatos, RespostaFatos> teste()

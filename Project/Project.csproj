@@ -67,23 +67,11 @@
     <Compile Include="AdicionarFato.Designer.cs">
       <DependentUpon>AdicionarFato.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaFatos.cs">
+    <Compile Include="NovaRegra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListaFatos.Designer.cs">
-      <DependentUpon>ListaFatos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ListaObjetivos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListaObjetivos.Designer.cs">
-      <DependentUpon>ListaObjetivos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ListaRegras.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListaRegras.Designer.cs">
-      <DependentUpon>ListaRegras.cs</DependentUpon>
+    <Compile Include="NovaRegra.Designer.cs">
+      <DependentUpon>NovaRegra.cs</DependentUpon>
     </Compile>
     <Compile Include="TelaPrincipal.cs">
       <SubType>Form</SubType>
@@ -103,14 +91,8 @@
     <EmbeddedResource Include="AdicionarRegra.resx">
       <DependentUpon>AdicionarRegra.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListaFatos.resx">
-      <DependentUpon>ListaFatos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListaObjetivos.resx">
-      <DependentUpon>ListaObjetivos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListaRegras.resx">
-      <DependentUpon>ListaRegras.cs</DependentUpon>
+    <EmbeddedResource Include="NovaRegra.resx">
+      <DependentUpon>NovaRegra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TelaPrincipal.resx">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>

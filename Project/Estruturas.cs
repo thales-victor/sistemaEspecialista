@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace Project.Estruturas
 {
-    /*
-     * FATOS
-     */
     public class Fato
     {
         public int Id;
         public string Nome;
         public TipoResposta Tipo;
         public List<Resposta> Respostas = new List<Resposta>();
-        public Fato(int id, string nome, TipoResposta tipo, List<Resposta> respostas)
+
+        public Fato(int id, string nome, TipoResposta tipo, Resposta[] respostas)
         {
             Nome = nome;
             Id = id;
             Tipo = tipo;
-            Respostas = respostas;
+            Respostas = new List<Resposta>(respostas);
         }
 
         public Resposta[] ListarRespostas()
@@ -34,19 +32,16 @@ namespace Project.Estruturas
         public int Id;
         public string Descricao;
         public int Valor;
-        public bool Numerico;
 
         public Resposta(int id, string desc)
         {
             this.Id = id;
             Descricao = desc;
-            Numerico = false;
         }
         public Resposta(int id, int num)
         {
             this.Id = id;
             Valor = num;
-            Numerico = true;
         }
 
         public Resposta()
@@ -60,7 +55,6 @@ namespace Project.Estruturas
         public int Id;
         public string Nome;
         public List<Condicao> Condicao = new List<Condicao>();
-       // public List<Objetivo> Objetivo = new List<Objetivo>();
         public List<CondicaoObjetivo> condicaoObjetivos = new List<CondicaoObjetivo>();
         public Regra(int id, string nome)
         {
@@ -82,7 +76,7 @@ namespace Project.Estruturas
             Id = Manager.instance.IncrementRegraIndex();
         }
 
-        public void AdicionarCondição(bool primeiro, Conectivo con, Fato f, Operador o, Resposta r)
+        public void AdicionarCondicao(bool primeiro, Conectivo con, Fato f, Operador o, Resposta r)
         {
             Condicao.Add(new Condicao()
             {
@@ -92,6 +86,33 @@ namespace Project.Estruturas
                 Resposta = r,
                 Primeiro = primeiro
             });
+
+            InserirPrimeiraCond();
+        }
+
+        public void RemoverCondicao(Condicao c)
+        {
+            if(c == null) return;
+
+            Condicao.Remove(c);
+
+            InserirPrimeiraCond();
+        }
+
+        public void InserirPrimeiraCond()
+        {
+            if (Condicao.Count() == 0)
+                return;
+
+            for(int i = 0; i < Condicao.Count(); i++)
+            {
+                var item = Condicao[i];
+                if (i == 0)
+                    item.Primeiro = true;
+                else
+                    item.Primeiro = false;
+
+            }
         }
 
         public void CondicaoObjetivo(Fato f, Operador o, Resposta r)
@@ -104,24 +125,25 @@ namespace Project.Estruturas
             });
         }
 
+        public void RemoverCondicaoObjetivo(CondicaoObjetivo c)
+        {
+            if (c == null) return;
+
+            condicaoObjetivos.Remove(c);
+        }
+
         public CondicaoObjetivo[] ListarCondicaoObjetivos()
         {
             return condicaoObjetivos.ToArray();
         }
-    }
 
-    
-    /*public class Objetivo
-    {
-        public int Id;
-        //public List<Fato> Fatos = new List<Fato>();
 
-        public Objetivo(int id/*, List<Fato> f)
+
+        public Fato[] ListarCondObjetivoFatos()
         {
-            Id = id;
-            //Fatos = f;
+            return condicaoObjetivos.ToArray().Select(x => x.Fato).ToArray();
         }
-    }*/
+    }
 
     public class Condicao
     {

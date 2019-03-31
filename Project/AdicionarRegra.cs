@@ -8,17 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Project.Estruturas;
+using MaterialSkin.Controls;
+using MaterialSkin.Animations;
+using MaterialSkin;
 
 namespace Project
 {
-    public partial class AdicionarRegra : Form
+    public partial class AdicionarRegra : MaterialForm
     {
 
-        Estruturas.Regra regra;
+        private readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+
+        Regra regra;
         public AdicionarRegra()
         {
-            regra = new Estruturas.Regra();
+            regra = new Regra();
+
             InitializeComponent();
+
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+
             PrepareListBox();
             PrepareObjetivos();
         }
@@ -71,16 +81,7 @@ namespace Project
 
             PrepareObjetivos();
         }
-
-        private void removeCondicao_btn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void removeObjetivo_btn_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void listaObjetivos_listbox_Format(object sender, ListControlConvertEventArgs e)
         {
@@ -104,14 +105,54 @@ namespace Project
 
         private void ok_btn_Click(object sender, EventArgs e)
         {
-            Manager.instance.AdicionarRegra(regra);
+            if (novaRegra_txtbox.Text == string.Empty)
+            {
+                var msgBox = new CustomMsgBox("Salvar Regra", "Preencha corretamente os campos para poder salvar!", MessageBoxType.E_OK);
+                msgBox.ShowDialog();
+            }
+            else
+            {
+                Manager.instance.AdicionarRegra(regra);
 
-            this.Close();
+                var msgBox = new CustomMsgBox("Regra Criada", $"Regra {novaRegra_txtbox.Text} criada com sucesso!", MessageBoxType.E_OK);
+                msgBox.ShowDialog();
+
+                this.Close();
+            }
+
+
         }
 
         private void novaRegra_txtbox_TextChanged(object sender, EventArgs e)
         {
             regra.Nome = novaRegra_txtbox.Text;
         }
+
+        private void AdicionarRegra_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (listaCondicao_listbox.SelectedItem == null) return;
+
+            var cond = listaCondicao_listbox.SelectedItem as Estruturas.Condicao;
+            regra.RemoverCondicao(cond);
+
+
+            PrepareListBox();
+        }
+        private void removeObjetivo_btn_Click(object sender, EventArgs e)
+        {
+            if (listaObjetivos_listbox.SelectedItem == null) return;
+
+            var cond = listaObjetivos_listbox.SelectedItem as Estruturas.CondicaoObjetivo;
+
+            regra.RemoverCondicaoObjetivo(cond);
+            PrepareObjetivos();
+        }
+
+
     }
 }

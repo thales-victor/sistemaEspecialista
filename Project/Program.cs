@@ -25,13 +25,13 @@ namespace Project
 
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
-            Application.Run(new frmMain());
+            Application.Run(new MainForm());
         }
 
         private static void OnProcessExit(object sender, EventArgs e)
         {
             mgr.SaveAllData();
-            MessageBox.Show("SAVED");
+            MessageBox.Show("Alterações salvas!");
         }
     }
 }

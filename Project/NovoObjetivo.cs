@@ -7,16 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
+using MaterialSkin.Animations;
+using MaterialSkin;
+using Project.Estruturas;
 
 namespace Project
 {
-    public partial class NovoObjetivo : Form
+    public partial class NovoObjetivo : MaterialForm
     {
-        Estruturas.Regra regra;
+        private readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
 
-        public NovoObjetivo(Estruturas.Regra Regra)
+        Regra regra;
+
+        public NovoObjetivo(Regra Regra)
         {
             InitializeComponent();
+
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+
             regra = Regra;
 
             InserirFatos();
@@ -43,7 +53,7 @@ namespace Project
             if (fato == null)
                 return;
 
-            var operadores = Estruturas.Util.ListarOperadores(fato.Tipo);
+            var operadores = Util.ListarOperadores(fato.Tipo);
             operador_combobox.DataSource = operadores;
 
             operador_combobox.SelectedIndex = 0;
@@ -62,8 +72,6 @@ namespace Project
                 resposta_combobox.SelectedIndex = 0;
             else
                 ok_btn.Enabled = false;
-
-
         }
 
         private void ok_btn_Click(object sender, EventArgs e)
@@ -76,10 +84,7 @@ namespace Project
 
             var resposta = fato.Respostas[respostaIndex];
 
-
-            //var objetivo = Manager.instance.CriarObjetivo();
-
-            regra.CondicaoObjetivo(fato, (Estruturas.Operador)operadorIndex, resposta);        
+            regra.CondicaoObjetivo(fato, (Operador)operadorIndex, resposta);        
 
             this.Close();
         }
@@ -87,6 +92,41 @@ namespace Project
         private void cancelar_btn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void NovoObjetivo_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckTipoRespostaNumerico(Fato fato)
+        {
+            if (fato.Tipo == TipoResposta.Numerico)
+            {
+                resposta_combobox.Hide();
+                respostaNumerica.Show();
+                respostaNumerica.Minimum = Convert.ToInt32(fato.Respostas[0].Descricao);
+                respostaNumerica.Maximum = Convert.ToInt32(fato.Respostas[1].Descricao);
+            }
+            else
+            {
+                resposta_combobox.Show();
+                respostaNumerica.Hide();
+            }
+        }
+
+        private void fato_combobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var index = fato_combobox.SelectedIndex;
+            var fato = Manager.instance.GetFatoById(index);
+
+            if (fato != null)
+            {
+                InserirRespostas(index);
+                InserirOperadores();
+
+                CheckTipoRespostaNumerico(fato);
+            }
         }
     }
 }

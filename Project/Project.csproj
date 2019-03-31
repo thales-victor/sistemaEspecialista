@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -48,17 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdicionarObjetivo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdicionarObjetivo.Designer.cs">
-      <DependentUpon>AdicionarObjetivo.cs</DependentUpon>
-    </Compile>
     <Compile Include="AdicionarRegra.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdicionarRegra.Designer.cs">
       <DependentUpon>AdicionarRegra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomMsgBox.Designer.cs">
+      <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Estruturas.cs" />
     <Compile Include="AdicionarFato.cs">
@@ -94,14 +97,20 @@
     <Compile Include="Manager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualizarRegra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualizarRegra.Designer.cs">
+      <DependentUpon>VisualizarRegra.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdicionarFato.resx">
       <DependentUpon>AdicionarFato.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdicionarObjetivo.resx">
-      <DependentUpon>AdicionarObjetivo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AdicionarRegra.resx">
       <DependentUpon>AdicionarRegra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomMsgBox.resx">
+      <DependentUpon>CustomMsgBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NovaRegra.resx">
       <DependentUpon>NovaRegra.cs</DependentUpon>
@@ -124,6 +133,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="VisualizarRegra.resx">
+      <DependentUpon>VisualizarRegra.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

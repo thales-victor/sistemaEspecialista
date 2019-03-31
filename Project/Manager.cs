@@ -64,7 +64,6 @@ namespace Project
         public void SaveAllData()
         {
             File.WriteAllText(DBName, JsonConvert.SerializeObject(j_Data, Formatting.Indented));
-
         }
 
         public void LoadAllData()
@@ -88,8 +87,20 @@ namespace Project
             return returnvalue.First();
         }
 
+        public Fato FindFatoByName(string name)
+        {
+            if (j_Data.fatos.Count == 0)
+                return null;
 
-        public Fato CriarFato(string nome, TipoResposta tipo, List<Resposta> respostas)
+            var returnvalue = j_Data.fatos.Where(x => x.Nome == name);
+            if (returnvalue.Count() == 0)
+                return null;
+
+            return returnvalue.First();
+        }
+
+
+        public Fato CriarFato(string nome, TipoResposta tipo, Resposta[] respostas)
         {
             var fato = new Fato(j_Data.Fatos_UltimoID++, nome, tipo, respostas);
             j_Data.fatos.Add(fato);
@@ -123,12 +134,29 @@ namespace Project
         public void AdicionarRegra(Regra regra)
         {
             j_Data.regras.Add(regra);
+            SaveAllData();
+        }
+
+        public void RemoverRegra(Regra regra)
+        {
+            if(regra != null) 
+                j_Data.regras.Remove(regra);
+
+            SaveAllData();
         }
 
         public void RemoverFatoIndex(int index)
         {
             if (j_Data.fatos[index] != null)
                 j_Data.fatos.Remove(j_Data.fatos[index]);
+
+            SaveAllData();
+        }
+
+        public void RemoverFatoItem(Fato fato)
+        {
+            if (j_Data.fatos.Contains(fato))
+                j_Data.fatos.Remove(fato);
 
             SaveAllData();
         }

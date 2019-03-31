@@ -8,16 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
+using MaterialSkin.Animations;
+using MaterialSkin;
 
 namespace Project
 {
-    public partial class NovaRegra : Form
+    public partial class NovaRegra : MaterialForm
     {
+        private readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+
         bool primeiraRegra;
-        Estruturas.Regra regra;
-        public NovaRegra(Estruturas.Regra Regra)
+        Regra regra;
+
+        public NovaRegra(Regra Regra)
         {
             InitializeComponent();
+
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
             primeiraRegra = Regra.Condicao.Count == 0;
             gb_Group.Enabled = !primeiraRegra;
@@ -31,7 +40,6 @@ namespace Project
 
         void InserirOperadores()
         {
-
             var fatoIndex = fato_combobox.SelectedIndex;
             var fato = Manager.instance.GetFatoById(fatoIndex);
 
@@ -50,14 +58,17 @@ namespace Project
             fato_combobox.DataSource = fatos.Select(x => x.Nome).ToArray();
 
             if (fato_combobox.Items.Count > 0)
+            {
                 fato_combobox.SelectedIndex = 0;
+                CheckTipoRespostaNumerico(fatos[0]);
+            }
 
-            CheckTipoRespostaNumerico(fatos[0]);
         }
 
         void InserirRespostas(int index = 0)
         {
             var fato = Manager.instance.GetFatoById(index);
+
             if (fato == null)
                 return;
 
@@ -68,8 +79,6 @@ namespace Project
                 resposta_combobox.SelectedIndex = 0;
             else
                 ok_btn.Enabled = false;
-
-            
         }
 
         private void fato_combobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,7 +118,7 @@ namespace Project
             var operadorIndex = operador_combobox.SelectedIndex;
             var respostaIndex = resposta_combobox.SelectedIndex;
 
-            Estruturas.Conectivo conectivo = e_radio.Checked ? Estruturas.Conectivo.E : Estruturas.Conectivo.OU;
+            Conectivo conectivo = e_radio.Checked ? Conectivo.E : Conectivo.OU;
 
             var fato = Manager.instance.GetFatoById(fatoIndex);
 
@@ -117,9 +126,9 @@ namespace Project
             var resposta = fato.Respostas[respostaIndex];
 
             if (fato.Tipo == TipoResposta.Numerico)
-                regra.AdicionarCondição(primeiraRegra, conectivo, fato, (Estruturas.Operador)operadorIndex, new Resposta(0, (int)respostaNumerica.Value));
+                regra.AdicionarCondicao(primeiraRegra, conectivo, fato, (Operador)operadorIndex, new Resposta(0, (int)respostaNumerica.Value));
             else
-                regra.AdicionarCondição(primeiraRegra, conectivo, fato, (Estruturas.Operador)operadorIndex, resposta);
+                regra.AdicionarCondicao(primeiraRegra, conectivo, fato, (Operador)operadorIndex, resposta);
 
             regra.Save();//Salvar o ID da regra
 
@@ -127,5 +136,9 @@ namespace Project
             
         }
 
+        private void NovaRegra_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

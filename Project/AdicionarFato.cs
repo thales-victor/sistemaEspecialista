@@ -8,17 +8,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
+using MaterialSkin.Animations;
+using MaterialSkin;
 
 namespace Project
 {
-    public partial class AdicionarFato : Form
+    public partial class AdicionarFato : MaterialForm
     {
-
+        private readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
         List<Resposta> Respostas = new List<Resposta>();
 
         public AdicionarFato()
         {
             InitializeComponent();
+
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
         }
 
 
@@ -35,10 +41,10 @@ namespace Project
                         max_txtbox.Hide();
                         addResposta_btn.Hide();
                         resposta_label.Hide();
+
                         GerarRespostasUnivalorado();
-                        listaResposta_label.Show();
-                        listaResposta_listbox.Show();
-                        removerResposta_btn.Hide();
+                        
+                        removerResposta_btn.Enabled = false;
                     }
                     break;
                 case TipoResposta.Multivalorado:
@@ -49,9 +55,8 @@ namespace Project
                         max_txtbox.Hide();
                         addResposta_btn.Show();
                         resposta_label.Show();
-                        listaResposta_label.Show();
-                        listaResposta_listbox.Show();
-                        removerResposta_btn.Show();
+
+                        removerResposta_btn.Enabled = true;
                     }
                     break;
                 case TipoResposta.Numerico:
@@ -62,9 +67,8 @@ namespace Project
                         max_txtbox.Show();
                         addResposta_btn.Hide();
                         resposta_label.Show();
-                        listaResposta_label.Hide();
-                        listaResposta_listbox.Hide();
-                        removerResposta_btn.Hide();
+
+                        removerResposta_btn.Enabled = false;
                     }
                     break;
             }
@@ -73,21 +77,13 @@ namespace Project
 
         private void AtualizaListBoxRespostas()
         {
-            listaResposta_listbox.DataSource = Respostas.Select(o => o.Descricao).ToList();
+            listaResposta_listbox.DataSource = Respostas.Select(o => o.Descricao).ToArray();
         }
 
-        private void AtualizaListBoxFatos()
-        {
-            listaFatos_listbox.DataSource = Manager.instance.ListarFatos().Select(o => o.Nome).ToList();
-        }
 
         private void GerarRespostasUnivalorado()
         {
-            var verdadeiro = new Resposta(0, "Verdadeiro");
-            var falso = new Resposta(1, "Falso");
-
-            Respostas.Add(verdadeiro);
-            Respostas.Add(falso);
+            Respostas.AddRange(new Resposta[]{ new Resposta(0, "Verdadeiro"), new Resposta(1, "Falso")});
         }
 
         private void GerarRespostasNumerico()
@@ -97,8 +93,7 @@ namespace Project
 
             if (!string.IsNullOrEmpty(min) && !string.IsNullOrEmpty(max))
             {
-                Respostas.Add(new Resposta(0, min));
-                Respostas.Add(new Resposta(1, max));
+                Respostas.AddRange(new Resposta[] { new Resposta(0, min), new Resposta(1, max) });
             }
         }
 
@@ -112,20 +107,18 @@ namespace Project
         {
             if (!IsValid())
             {
-                MessageBox.Show("Preencha corretamente os campos para poder salvar!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var msgBox = new CustomMsgBox("Salvar", "Preencha corretamente os campos para poder salvar!", MessageBoxType.E_OK);
+                msgBox.ShowDialog();
                 return;
             }
             var nome = nomeFato_txtbox.Text;
             var tipo = BuscaTipoRespostaSelecionada();
 
-
-
-            Manager.instance.CriarFato(nome, tipo.Value, Respostas);
-            AtualizaListBoxFatos();
+            Manager.instance.CriarFato(nome, tipo, Respostas.ToArray());
             Init();
         }
 
-        public TipoResposta? BuscaTipoRespostaSelecionada()
+        public TipoResposta BuscaTipoRespostaSelecionada()
         {
             if (univalorada_radio.Checked)
                 return TipoResposta.Univalorado;
@@ -134,7 +127,7 @@ namespace Project
             else if (numerica_radio.Checked)
                 return TipoResposta.Numerico;
 
-            return null;
+            return TipoResposta.Univalorado;
         }
 
         public void AdicionarResposta()
@@ -176,7 +169,7 @@ namespace Project
             nomeFato_txtbox.Text = string.Empty;
             univalorada_radio.Checked = true;
             AlteraRadio(TipoResposta.Univalorado);
-            AtualizaListBoxFatos();
+
         }
 
         #region --------------------- EVENTOS ---------------------
@@ -209,21 +202,13 @@ namespace Project
         private void salvarFato_btn_Click(object sender, EventArgs e)
         {
             CriarNovoFato();
+
+            var msgBox = new CustomMsgBox("Novo Fato", "Fato criado com sucesso!", MessageBoxType.E_OK);
+            msgBox.ShowDialog();
         }
         private void addResposta_btn_Click(object sender, EventArgs e)
         {
             AdicionarResposta();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var sel = listaFatos_listbox.SelectedIndex;
-
-            if (sel != -1)
-            {
-                Manager.instance.RemoverFatoIndex(sel);
-                AtualizaListBoxFatos();
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -237,5 +222,6 @@ namespace Project
             }
         }
         #endregion --------------------- EVENTOS ---------------------
+
     }
 }

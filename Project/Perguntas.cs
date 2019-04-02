@@ -15,6 +15,7 @@ namespace Project
     {
         public int Return;
         private List<RadioButton> radioButtons = new List<RadioButton>();
+        private NumericUpDown numbox = new NumericUpDown();
         private Fato Fato;
         public Perguntas(Fato fato)
         {
@@ -29,29 +30,49 @@ namespace Project
             pergunta_label.Text += Fato.Nome;
             pergunta_label.Text += " ?";
 
-            foreach(var resposta in Fato.Respostas)
+            if (Fato.Tipo == TipoResposta.Numerico)
             {
-                var rdbtn = new RadioButton()
-                {
-                    Text = resposta.Descricao,
-                    Location = new Point(148, y),
-                    Visible = true,
-                    Name = resposta.Id.ToString()
-                };
-                radioButtons.Add(rdbtn);
-                this.Controls.Add(rdbtn);
-                y += 25;
+                numbox.Location = new Point(148, y);
+                numbox.Visible = true;
+                numbox.Minimum = Convert.ToInt32(Fato.Respostas[0].Descricao);
+                numbox.Maximum = Convert.ToInt32(Fato.Respostas[1].Descricao);
+                numbox.ReadOnly = true;
+                Controls.Add(numbox);
             }
+            else
+            { 
+                foreach(var resposta in Fato.Respostas)
+                {
+                    var rdbtn = new RadioButton()
+                    {
+                        Text = resposta.Descricao,
+                        Location = new Point(148, y),
+                        Visible = true,
+                        Name = resposta.Id.ToString()
+                    };
+                    radioButtons.Add(rdbtn);
+                    this.Controls.Add(rdbtn);
+                    y += 25;
+                }
+            }
+
         }
 
         private int RespostaSelecionada()
         {
             int selecionada = -1;
-            foreach (var radio in radioButtons)
+            if (Fato.Tipo == TipoResposta.Numerico)
             {
-                if (radio.Checked)
+                selecionada = Convert.ToInt32(numbox.Value);
+            }
+            else
+            {
+                foreach (var radio in radioButtons)
                 {
-                    selecionada = Convert.ToInt32(radio.Name);
+                    if (radio.Checked)
+                    {
+                        selecionada = Convert.ToInt32(radio.Name);
+                    }
                 }
             }
             return selecionada;

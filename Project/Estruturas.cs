@@ -249,6 +249,11 @@ namespace Project.Estruturas
         {
             Respostas.Add(new RespostaUsuario(fato, resposta));
         }
+
+        public void AdicionaResposta(Fato fato, int resposta)
+        {
+            Respostas.Add(new RespostaUsuario(fato, new Resposta(Manager.instance.LastIdResposta()+1, resposta)));
+        }
     }
 
     public class RespostaUsuario

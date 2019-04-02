@@ -122,7 +122,6 @@ namespace Project
 
             var fato = Manager.instance.GetFatoById(fatoIndex);
 
-
             var resposta = fato.Respostas[respostaIndex];
 
             if (fato.Tipo == TipoResposta.Numerico)

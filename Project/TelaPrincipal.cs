@@ -84,34 +84,56 @@ namespace Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var regras = ObterRegrasComObjetivosAlvo();
+            //var regras = ObterRegrasComObjetivosAlvo();
+            var regras = Manager.instance.ListarRegras().ToList();
+            var fatos = new List<Fato>();
 
-            if (regras.Length == 0)
-                return;
+            regras.ForEach(o => o.Condicao.ForEach(c => fatos.Add(c.Fato)));
 
-            var RespostasUsuario = new RespostasUsuario();
+            fatos = fatos.GroupBy(o => o.Id).Select(s => s.First()).ToList();
 
-            foreach (var regra in regras)
+            if (fatos.Count == 0)
             {
-                var condicoes = regra.Condicao;
-                if (condicoes.Count == 0)
-                    return;
-                foreach (var condicao in condicoes)
-                {
-                    using (var perguntas = new Perguntas(condicao.Fato))
-                    {
-                        perguntas.ShowDialog();
-                        var resposta = Manager.instance.GetRespostaByIdFatoAndIdResposta(condicao.Fato.Id, perguntas.Return);
-                        RespostasUsuario.AdicionaResposta(condicao.Fato, resposta);
+                return;
+            }
 
-                        //if (resposta gerar resultado false e regra possuir somente conectivo &&)
-                        //{
-                        //    continue;
-                        //}
+            var possuiConectorOu = regras.Any(o => o.Condicao.Any(c => c.Conectivo == Conectivo.OU));
+
+            var respostasUsuario = new RespostasUsuario();
+
+            foreach (var fato in fatos)
+            {
+                using (var perguntas = new Perguntas(fato))
+                {
+                    perguntas.ShowDialog();
+                    if (fato.Tipo == TipoResposta.Numerico)
+                    {
+                        var resposta = perguntas.Return;
+                        respostasUsuario.AdicionaResposta(fato, resposta);
+                    }
+                    else
+                    {
+                        var resposta = Manager.instance.GetRespostaByIdFatoAndIdResposta(fato.Id, perguntas.Return);
+                        respostasUsuario.AdicionaResposta(fato, resposta);
+
                     }
                 }
             }
+            RetornaRespostaParaUsuario(respostasUsuario, regras);
+        }
 
+        private void RetornaRespostaParaUsuario(RespostasUsuario respostasUsuario, List<Regra> regras)
+        {
+            /*
+             foreach na regra
+             foreach na condicao
+             pega resposta do fato
+             bate com respostaUsuario
+             da o retorno
+             
+             
+             */
+            throw new NotImplementedException();
         }
 
 

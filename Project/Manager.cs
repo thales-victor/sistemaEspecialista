@@ -166,5 +166,10 @@ namespace Project
             var fato = GetFatoById(idFato);
             return fato.Respostas.Where(o => o.Id == idResposta).FirstOrDefault();
         }
+
+        public int LastIdResposta()
+        {
+            return j_Data.resposta_fatos_UltimoID;
+        }
     }
 }

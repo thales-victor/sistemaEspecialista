@@ -13,10 +13,12 @@ namespace Project
 {
     public partial class Perguntas : Form
     {
-        private Condicao Condicao;
-        public Perguntas(Condicao condicao)
+        public int Return;
+        private List<RadioButton> radioButtons = new List<RadioButton>();
+        private Fato Fato;
+        public Perguntas(Fato fato)
         {
-            Condicao = condicao;
+            Fato = fato;
             InitializeComponent();
         }
 
@@ -24,21 +26,35 @@ namespace Project
         {
             int y = 130;
 
-            pergunta_label.Text += Condicao.Fato.Nome;
+            pergunta_label.Text += Fato.Nome;
             pergunta_label.Text += " ?";
 
-            foreach(var resposta in Condicao.Fato.Respostas)
+            foreach(var resposta in Fato.Respostas)
             {
                 var rdbtn = new RadioButton()
                 {
                     Text = resposta.Descricao,
                     Location = new Point(148, y),
                     Visible = true,
-                
+                    Name = resposta.Id.ToString()
                 };
+                radioButtons.Add(rdbtn);
                 this.Controls.Add(rdbtn);
                 y += 25;
             }
+        }
+
+        private int RespostaSelecionada()
+        {
+            int selecionada = -1;
+            foreach (var radio in radioButtons)
+            {
+                if (radio.Checked)
+                {
+                    selecionada = Convert.ToInt32(radio.Name);
+                }
+            }
+            return selecionada;
         }
 
         private void Perguntas_Load(object sender, EventArgs e)
@@ -48,6 +64,7 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Return = RespostaSelecionada();
             this.Close();
         }
     }

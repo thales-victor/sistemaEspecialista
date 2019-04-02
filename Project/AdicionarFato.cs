@@ -132,6 +132,11 @@ namespace Project
 
         public void AdicionarResposta()
         {
+            if (string.IsNullOrEmpty(resp_min_txtbox.Text))
+            {
+                return;
+            }
+
             int id = Respostas.Count + 1;
             string desc = resp_min_txtbox.Text;
 

@@ -240,4 +240,26 @@ namespace Project.Estruturas
             return str.ToArray();
         }
     }
+
+    public class RespostasUsuario
+    {
+        public List<RespostaUsuario> Respostas = new List<RespostaUsuario>();
+
+        public void AdicionaResposta(Fato fato, Resposta resposta)
+        {
+            Respostas.Add(new RespostaUsuario(fato, resposta));
+        }
+    }
+
+    public class RespostaUsuario
+    {
+        public Fato Fato { get; set; }
+        public Resposta Resposta { get; set; }
+
+        public RespostaUsuario(Fato fato, Resposta resposta)
+        {
+            Fato = fato;
+            Resposta = resposta;
+        }
+    }
 }

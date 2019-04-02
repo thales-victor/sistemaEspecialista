@@ -160,5 +160,11 @@ namespace Project
 
             SaveAllData();
         }
+
+        public Resposta GetRespostaByIdFatoAndIdResposta(int idFato, int idResposta)
+        {
+            var fato = GetFatoById(idFato);
+            return fato.Respostas.Where(o => o.Id == idResposta).FirstOrDefault();
+        }
     }
 }

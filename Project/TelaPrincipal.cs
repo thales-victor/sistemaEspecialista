@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MaterialSkin.Controls;
 using MaterialSkin.Animations;
 using MaterialSkin;
+using Project.Estruturas;
 
 namespace Project
 {
@@ -53,13 +54,13 @@ namespace Project
         
         //POR FAVOR NÃO MEXE NISSO SEM FALAR COMIGO, EU DEI A VIDA PRA FAZER ISSO FUNCIONAR
         // -VICTOR
-        private Estruturas.Regra[] ObterRegrasComObjetivosAlvo()
+        private Regra[] ObterRegrasComObjetivosAlvo()
         {
-            Estruturas.Fato[] FatosAlvos = Manager.instance.ListarAlvos();
+            Fato[] FatosAlvos = Manager.instance.ListarAlvos();
 
-            List<Estruturas.Regra> RegrasAlvo = new List<Estruturas.Regra>();
+            List<Regra> RegrasAlvo = new List<Regra>();
 
-            Dictionary<Estruturas.Regra, Estruturas.Fato[]> FatosAlvosComRegra = new Dictionary<Estruturas.Regra, Estruturas.Fato[]>();
+            Dictionary<Regra, Fato[]> FatosAlvosComRegra = new Dictionary<Regra, Fato[]>();
 
             foreach (var item in Manager.instance.ListarRegras())
             {
@@ -83,10 +84,13 @@ namespace Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var regras = Manager.instance.ListarRegras();
+            var regras = ObterRegrasComObjetivosAlvo();
 
             if (regras.Length == 0)
                 return;
+
+            var RespostasUsuario = new RespostasUsuario();
+
             foreach (var regra in regras)
             {
                 var condicoes = regra.Condicao;
@@ -94,12 +98,20 @@ namespace Project
                     return;
                 foreach (var condicao in condicoes)
                 {
-                    using (var perguntas = new Perguntas(condicao))
+                    using (var perguntas = new Perguntas(condicao.Fato))
                     {
                         perguntas.ShowDialog();
+                        var resposta = Manager.instance.GetRespostaByIdFatoAndIdResposta(condicao.Fato.Id, perguntas.Return);
+                        RespostasUsuario.AdicionaResposta(condicao.Fato, resposta);
+
+                        //if (resposta gerar resultado false e regra possuir somente conectivo &&)
+                        //{
+                        //    continue;
+                        //}
                     }
                 }
             }
+
         }
 
 

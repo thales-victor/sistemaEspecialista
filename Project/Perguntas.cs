@@ -8,19 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
+using MaterialSkin.Animations;
+using MaterialSkin;
 
 namespace Project
 {
-    public partial class Perguntas : Form
+    public partial class Perguntas : MaterialForm
     {
+        private readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+        
         public int Return;
-        private List<RadioButton> radioButtons = new List<RadioButton>();
+        private List<MaterialSkin.Controls.MaterialRadioButton> radioButtons = new List<MaterialSkin.Controls.MaterialRadioButton>();
         private NumericUpDown numbox = new NumericUpDown();
         private Fato Fato;
+
         public Perguntas(Fato fato)
         {
             Fato = fato;
             InitializeComponent();
+
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
         }
 
         private void Init()
@@ -43,7 +52,7 @@ namespace Project
             { 
                 foreach(var resposta in Fato.Respostas)
                 {
-                    var rdbtn = new RadioButton()
+                    var rdbtn = new MaterialSkin.Controls.MaterialRadioButton()
                     {
                         Text = resposta.Descricao,
                         Location = new Point(148, y),

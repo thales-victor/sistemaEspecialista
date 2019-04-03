@@ -82,8 +82,15 @@ namespace Project
 
             var fato = Manager.instance.GetFatoById(fatoIndex);
 
-            var resposta = fato.Respostas[respostaIndex];
-
+            Resposta resposta;
+            if (fato.Tipo == TipoResposta.Numerico)
+            {
+                resposta = new Resposta(Manager.instance.LastIdResposta(), Convert.ToInt32(respostaNumerica.Value));
+            }
+            else
+            {
+                resposta = fato.Respostas[respostaIndex];
+            }
             regra.CondicaoObjetivo(fato, (Operador)operadorIndex, resposta);        
 
             this.Close();

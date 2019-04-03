@@ -69,7 +69,14 @@ namespace Project
             {
                 var cond = ((CondicaoObjetivo)e.ListItem);
 
-                e.Value = string.Format($"{cond.Fato.Nome} {Util.ParseOperador(cond.Operador)} {cond.Resposta.Descricao}");
+                object obj;
+                if (cond.Fato.Tipo == TipoResposta.Numerico)
+                    obj = cond.Resposta.Valor;
+                else
+                    obj = cond.Resposta.Descricao;
+                
+
+                e.Value = string.Format($"{cond.Fato.Nome} {Util.ParseOperador(cond.Operador)} {obj}");
 
             }
             else

@@ -25,6 +25,33 @@ namespace Project.Estruturas
         {
             return this.Respostas.ToArray();
         }
+
+        public override bool Equals(object other)
+        {
+            if (other is Fato)
+                return ((Fato)other).Nome == this.Nome;
+
+            return false;
+        }
+    }
+
+    public class ComparadorFato : IEqualityComparer<Fato>
+    {
+        public bool Equals(Fato x, Fato y)
+        {
+            if (x == y)
+                return true;
+            if (x == null || y == null)
+                return false;
+
+            return x.Nome == y.Nome;
+        }
+
+
+        public int GetHashCode(Fato fato)
+        {
+            return fato != null ? fato.Id : 0;
+        }
     }
 
     public class Resposta
@@ -247,13 +274,15 @@ namespace Project.Estruturas
 
         public void AdicionaResposta(Fato fato, Resposta resposta)
         {
+
+
             Respostas.Add(new RespostaUsuario(fato, resposta));
         }
 
-        public void AdicionaResposta(Fato fato, int resposta)
+        /*public void AdicionaResposta(Fato fato, int resposta)
         {
             Respostas.Add(new RespostaUsuario(fato, new Resposta(Manager.instance.LastIdResposta()+1, resposta)));
-        }
+        }*/
     }
 
     public class RespostaUsuario

@@ -88,8 +88,15 @@ namespace Project
             if (e.ListItem is CondicaoObjetivo)
             {
                 var cond = ((CondicaoObjetivo)e.ListItem);
+
+                object obj;
+                if (cond.Fato.Tipo == TipoResposta.Numerico)
+                    obj = cond.Resposta.Valor;
+                else
+                    obj = cond.Resposta.Descricao;
+
                 
-                e.Value = string.Format($"{cond.Fato.Nome} {Util.ParseOperador(cond.Operador)} {cond.Resposta.Descricao}");
+                e.Value = string.Format($"{cond.Fato.Nome} {Util.ParseOperador(cond.Operador)} {obj}");
 
             }
             else

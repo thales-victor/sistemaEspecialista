@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.regrasCriadas_listbox = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_play = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.novoFato_btn = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -66,15 +66,18 @@
             this.regrasCriadas_listbox.TabIndex = 4;
             this.regrasCriadas_listbox.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.regrasCriadas_listbox_Format);
             // 
-            // button3
+            // btn_play
             // 
-            this.button3.Location = new System.Drawing.Point(416, 442);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Play";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btn_play.Depth = 0;
+            this.btn_play.Location = new System.Drawing.Point(400, 430);
+            this.btn_play.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_play.Name = "btn_play";
+            this.btn_play.Primary = true;
+            this.btn_play.Size = new System.Drawing.Size(91, 37);
+            this.btn_play.TabIndex = 6;
+            this.btn_play.Text = "Play";
+            this.btn_play.UseVisualStyleBackColor = true;
+            this.btn_play.Click += new System.EventHandler(this.button3_Click);
             // 
             // materialTabControl1
             // 
@@ -324,7 +327,7 @@
             // 
             this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(12, 421);
+            this.materialDivider1.Location = new System.Drawing.Point(12, 418);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
             this.materialDivider1.Size = new System.Drawing.Size(483, 1);
@@ -334,7 +337,7 @@
             // testObjetivosEmComum_btn
             // 
             this.testObjetivosEmComum_btn.Depth = 0;
-            this.testObjetivosEmComum_btn.Location = new System.Drawing.Point(152, 431);
+            this.testObjetivosEmComum_btn.Location = new System.Drawing.Point(152, 430);
             this.testObjetivosEmComum_btn.MouseState = MaterialSkin.MouseState.HOVER;
             this.testObjetivosEmComum_btn.Name = "testObjetivosEmComum_btn";
             this.testObjetivosEmComum_btn.Primary = true;
@@ -354,7 +357,7 @@
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialTabSelector1);
             this.Controls.Add(this.materialTabControl1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_play);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(508, 479);
             this.MinimumSize = new System.Drawing.Size(508, 479);
@@ -375,7 +378,7 @@
 
         #endregion
         private System.Windows.Forms.ListBox regrasCriadas_listbox;
-        private System.Windows.Forms.Button button3;
+        private MaterialSkin.Controls.MaterialRaisedButton btn_play;
         private MaterialSkin.Controls.MaterialTabControl materialTabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;

@@ -115,6 +115,10 @@ namespace Project
             var tipo = BuscaTipoRespostaSelecionada();
 
             Manager.instance.CriarFato(nome, tipo, Respostas.ToArray());
+
+            var success = new CustomMsgBox("Novo Fato", "Fato criado com sucesso!", MessageBoxType.E_OK);
+            success.ShowDialog();
+
             Init();
         }
 
@@ -208,8 +212,7 @@ namespace Project
         {
             CriarNovoFato();
 
-            var msgBox = new CustomMsgBox("Novo Fato", "Fato criado com sucesso!", MessageBoxType.E_OK);
-            msgBox.ShowDialog();
+            
         }
         private void addResposta_btn_Click(object sender, EventArgs e)
         {

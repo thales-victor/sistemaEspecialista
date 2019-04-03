@@ -37,7 +37,7 @@ namespace Project
             AtualizarRegrasCriadas();
         }
 
-        
+
         private void AtualizarFatosCriados()
         {
             fatosCriados_listbox.DataSource = Manager.instance.ListarFatos().Select(o => o.Nome).ToList();
@@ -51,10 +51,10 @@ namespace Project
             regrasCriadas_listbox.DataSource = Manager.instance.ListarRegras();
         }
 
-        
+
         //POR FAVOR NÃO MEXE NISSO SEM FALAR COMIGO, EU DEI A VIDA PRA FAZER ISSO FUNCIONAR
         // -VICTOR
-        private Regra[] ObterRegrasComObjetivosAlvo()
+        public Regra[] ObterRegrasComObjetivosAlvo()
         {
             Fato[] FatosAlvos = Manager.instance.ListarAlvos();
 
@@ -66,13 +66,13 @@ namespace Project
             {
                 FatosAlvosComRegra.Add(item, item.ListarCondObjetivoFatos());
             }
-
-            foreach(var item in FatosAlvosComRegra)
+            
+            foreach (var item in FatosAlvosComRegra)
             {
                 var regra = item.Key;
                 var fatos = item.Value;
-                
-                var newData = FatosAlvos.Intersect(fatos);
+
+                var newData = fatos.Intersect(FatosAlvos, new ComparadorFato());
 
                 if (newData.Count() > 0)
                     RegrasAlvo.Add(regra);
@@ -84,13 +84,16 @@ namespace Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //var regras = ObterRegrasComObjetivosAlvo();
-            var regras = Manager.instance.ListarRegras().ToList();
-            var fatos = new List<Fato>();
+            var regras = ObterRegrasComObjetivosAlvo().ToList();
 
-            regras.ForEach(o => o.Condicao.ForEach(c => fatos.Add(c.Fato)));
-
-            fatos = fatos.GroupBy(o => o.Id).Select(s => s.First()).ToList();
+            if (regras.Count() == 0)
+            {
+                var noContent = new CustomMsgBox("Falha na inicialização", "É necessário selecionar pelomenos um objetivo antes de inicializar.", MessageBoxType.E_OK);
+                noContent.ShowDialog();
+                return;
+            }
+            
+            var fatos = GetDistinctFatos(regras);
 
             if (fatos.Count == 0)
             {
@@ -101,53 +104,205 @@ namespace Project
 
             var respostasUsuario = new RespostasUsuario();
 
+            var regrasPossiveis = new List<Regra>();
+
+            bool boolPrimeiroLoop = true;
+
             foreach (var fato in fatos)
             {
                 using (var perguntas = new Perguntas(fato))
                 {
                     perguntas.ShowDialog();
-                    if (fato.Tipo == TipoResposta.Numerico)
+
+                    var resposta = GetResposta(fato, perguntas);
+
+                    if (boolPrimeiroLoop)
                     {
-                        var resposta = perguntas.Return;
-                        respostasUsuario.AdicionaResposta(fato, resposta);
+                        boolPrimeiroLoop = false;
+                        foreach (var regra in regras)
+                        {
+                            if (!regra.Condicao.Any(c => c.Fato.Nome == fato.Nome)) //na regra, nao importa o fato atual, somente outro
+                            {
+                                regrasPossiveis.Add(regra);
+                            }
+                            else
+                            {
+                                foreach (var condicao in regra.Condicao)
+                                {
+                                    if (fato.Nome == condicao.Fato.Nome)
+                                    {
+                                        if (VerificaRespostaBaseadoNoTipo(fato.Tipo, condicao.Operador, condicao.Resposta, resposta))
+                                        {
+                                            regrasPossiveis.Add(regra);
+                                            if (regra.Condicao.Count == 1 && regrasPossiveis.Count == 1)
+                                            {
+                                                RetornaRespostaParaUsuario(respostasUsuario, regrasPossiveis);
+                                                return;
+                                            }
+                                        }
+                                        else if (!possuiConectorOu)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (regrasPossiveis.Count == 0)
+                        {
+                            RetornaRespostaParaUsuario(respostasUsuario, regrasPossiveis);
+                            return;
+                        }
                     }
                     else
                     {
-                        var resposta = Manager.instance.GetRespostaByIdFatoAndIdResposta(fato.Id, perguntas.Return);
-                        respostasUsuario.AdicionaResposta(fato, resposta);
-
+                        var copy = new List<Regra>();
+                        copy.AddRange(regrasPossiveis);
+                        foreach (var regra in copy)
+                        {
+                            if (regra.Condicao.Any(c => c.Fato.Nome == fato.Nome))
+                            {
+                                foreach (var condicao in regra.Condicao)
+                                {
+                                    if (fato.Nome == condicao.Fato.Nome)
+                                    {
+                                        if (!VerificaRespostaBaseadoNoTipo(fato.Tipo, condicao.Operador, condicao.Resposta, resposta))
+                                        {
+                                            regrasPossiveis.Remove(regra);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                    respostasUsuario.AdicionaResposta(fato, resposta);
                 }
             }
-            RetornaRespostaParaUsuario(respostasUsuario, regras);
+
+            RetornaRespostaParaUsuario(respostasUsuario, regrasPossiveis);
         }
 
-        private void RetornaRespostaParaUsuario(RespostasUsuario respostasUsuario, List<Regra> regras)
+        private bool VerificaRespostaBaseadoNoTipo(TipoResposta tipo, Operador operador, Resposta respostaRegra, Resposta respostaUsuario)
         {
-            /*
-             foreach na regra
-             foreach na condicao
-             pega resposta do fato
-             bate com respostaUsuario
-             da o retorno
-             
-             
-             */
-            throw new NotImplementedException();
+            if (tipo == TipoResposta.Numerico)
+                return VerificacoesRespostaNumerica(operador, respostaRegra, respostaUsuario);
+            else
+                return VerificacoesRespostaBooleana(operador, respostaRegra, respostaUsuario);
         }
 
+        public bool VerificacoesRespostaNumerica(Operador operador, Resposta respostaRegra, Resposta respostaUsuario)
+        {
+            switch (operador)
+            {
+                case Operador.Igual:
+                    if (respostaUsuario.Valor == respostaRegra.Valor)
+                        return true;
+                    break;
+                case Operador.Diferente:
+                    if (respostaUsuario.Valor != respostaRegra.Valor)
+                        return true;
+                    break;
+                case Operador.Maior:
+                    if (respostaUsuario.Valor > respostaRegra.Valor)
+                        return true;
+                    break;
+                case Operador.Menor:
+                    if (respostaUsuario.Valor < respostaRegra.Valor)
+                        return true;
+                    break;
+                case Operador.Maior_Igual:
+                    if (respostaUsuario.Valor >= respostaRegra.Valor)
+                        return true;
+                    break;
+                case Operador.Menor_Igual:
+                    if (respostaUsuario.Valor <= respostaRegra.Valor)
+                        return true;
+                    break;
+            }
+
+            return false;
+        }
+
+        public bool VerificacoesRespostaBooleana(Operador operador, Resposta respostaRegra, Resposta respostaUsuario)
+        {
+            switch (operador)
+            {
+                case Operador.Igual:
+                    if (respostaRegra.Descricao == respostaUsuario.Descricao)
+                        return true;
+                    break;
+                case Operador.Diferente:
+                    if (respostaRegra.Descricao != respostaUsuario.Descricao)
+                        return true;
+                    break;
+            }
+
+            return false;
+        }
+
+        private static Resposta GetResposta(Fato fato, Perguntas perguntas)
+        {
+            Resposta resposta;
+            if (fato.Tipo == TipoResposta.Numerico)
+            {
+                resposta = new Resposta(Manager.instance.LastIdResposta(), perguntas.Return);
+            }
+            else
+            {
+                resposta = Manager.instance.GetRespostaByIdFatoAndIdResposta(fato.Id, perguntas.Return);
+            }
+
+            return resposta;
+        }
+
+        private List<Fato> GetDistinctFatos(List<Regra> regras)
+        {
+            var fatos = new List<Fato>();
+            regras.ForEach(o => o.Condicao.ForEach(c => fatos.Add(c.Fato)));
+
+            fatos = fatos.GroupBy(o => o.Id).Select(s => s.First()).ToList();
+            return fatos;
+        }
+
+        private void RetornaRespostaParaUsuario(RespostasUsuario respostasUsuario, List<Regra> regrasPossiveis)
+        {
+            if (regrasPossiveis.Count == 0)
+            {
+                var noContent = new CustomMsgBox("FIM", "Não existe resultado possível!", MessageBoxType.E_OK);
+                noContent.ShowDialog();
+                return;
+            }
+
+            else
+            {
+                string msg = "";
+                foreach (var regra in regrasPossiveis)
+                {
+                    foreach (var objetivo in regra.condicaoObjetivos)
+                    {
+                        msg += $"{objetivo.Fato.Nome} {Util.ParseOperador(objetivo.Operador)} {objetivo.Resposta.Descricao}\n";
+                    }
+                }
+
+                var msgBox = new CustomMsgBox("FIM", msg, MessageBoxType.E_OK);
+                msgBox.ShowDialog();
+                return;
+            }
+        }
+        
 
         #region FATOS
         private void removerFato_btn_Click(object sender, EventArgs e)
         {
-            if(fatosCriados_listbox.SelectedItem == null) return;
+            if (fatosCriados_listbox.SelectedItem == null) return;
 
             var nome = fatosCriados_listbox.SelectedItem as string;
 
             var msgBox = new CustomMsgBox("Remover Fato", $"Você tem certeza de que deseja remover o fato {nome}?", MessageBoxType.E_SimNao);
             var result = msgBox.ShowDialog();
 
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 var sel = fatosCriados_listbox.SelectedIndex;
 
@@ -205,7 +360,7 @@ namespace Project
         {
             objetivos_listbox.DataSource = FatoObjetivos.ToArray();
         }
-        
+
         private void objetivos_listbox_Format(object sender, ListControlConvertEventArgs e)
         {
             if (e.ListItem is Estruturas.Fato)

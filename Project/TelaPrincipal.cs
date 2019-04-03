@@ -100,8 +100,6 @@ namespace Project
                 return;
             }
 
-            var possuiConectorOu = regras.Any(o => o.Condicao.Any(c => c.Conectivo == Conectivo.OU));
-
             var respostasUsuario = new RespostasUsuario();
 
             var regrasPossiveis = new List<Regra>();
@@ -160,6 +158,7 @@ namespace Project
                         copy.AddRange(regrasPossiveis);
                         foreach (var regra in copy)
                         {
+                            var possuiConectorOu = regra.Condicao.Any(c => c.Conectivo == Conectivo.OU);
                             if (regra.Condicao.Any(c => c.Fato.Nome == fato.Nome))
                             {
                                 foreach (var condicao in regra.Condicao)

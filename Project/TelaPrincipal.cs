@@ -132,15 +132,12 @@ namespace Project
                                         if (VerificaRespostaBaseadoNoTipo(fato.Tipo, condicao.Operador, condicao.Resposta, resposta))
                                         {
                                             regrasPossiveis.Add(regra);
-                                            if (regra.Condicao.Count == 1 && regrasPossiveis.Count == 1)
+                                            if (regra.Condicao.Count == 1 && regrasPossiveis.Count == 1 && regras.Count == 1)
                                             {
                                                 RetornaRespostaParaUsuario(respostasUsuario, regrasPossiveis);
                                                 return;
                                             }
-                                        }
-                                        else if (!possuiConectorOu)
-                                        {
-                                            continue;
+                                            
                                         }
                                     }
                                 }

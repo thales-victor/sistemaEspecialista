@@ -337,11 +337,11 @@
             // testObjetivosEmComum_btn
             // 
             this.testObjetivosEmComum_btn.Depth = 0;
-            this.testObjetivosEmComum_btn.Location = new System.Drawing.Point(152, 430);
+            this.testObjetivosEmComum_btn.Location = new System.Drawing.Point(16, 430);
             this.testObjetivosEmComum_btn.MouseState = MaterialSkin.MouseState.HOVER;
             this.testObjetivosEmComum_btn.Name = "testObjetivosEmComum_btn";
             this.testObjetivosEmComum_btn.Primary = true;
-            this.testObjetivosEmComum_btn.Size = new System.Drawing.Size(170, 36);
+            this.testObjetivosEmComum_btn.Size = new System.Drawing.Size(144, 36);
             this.testObjetivosEmComum_btn.TabIndex = 10;
             this.testObjetivosEmComum_btn.Text = "Regras Play";
             this.testObjetivosEmComum_btn.UseVisualStyleBackColor = true;

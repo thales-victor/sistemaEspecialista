@@ -274,6 +274,18 @@ namespace Project
                 return;
             }
 
+            else if (regrasPossiveis.Count == 1)
+            {
+                string msg = "";
+                foreach (var objetivo in regrasPossiveis.First().condicaoObjetivos)
+                {
+                    msg += $"{objetivo.Fato.Nome} {Util.ParseOperador(objetivo.Operador)} {objetivo.Resposta.Descricao}\n";
+                }
+                var msgBox = new CustomMsgBox("Resultado", msg, MessageBoxType.E_OK);
+                msgBox.ShowDialog();
+                return;
+            }
+
             else
             {
                 string msg = "";
@@ -285,7 +297,7 @@ namespace Project
                     }
                 }
 
-                var msgBox = new CustomMsgBox("FIM", msg, MessageBoxType.E_OK);
+                var msgBox = new CustomMsgBox("Possibilidades", msg, MessageBoxType.E_OK);
                 msgBox.ShowDialog();
                 return;
             }

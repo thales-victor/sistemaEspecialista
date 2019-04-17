@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using Project.Estruturas;
 
@@ -11,7 +12,6 @@ namespace Project
 {
     public class Manager
     {
-        private string DBName = "database.json";
         ToJSONData j_Data;
         class ToJSONData
         {
@@ -49,6 +49,9 @@ namespace Project
             return j_Data.regras_UltimoID++;
         }
 
+        private string FileNameToSave = "database.json";
+        public string GetFileName() => FileNameToSave;
+
         public static Manager instance;
         public Manager()
         {
@@ -56,22 +59,85 @@ namespace Project
             {
                 throw new Exception("Instancia Manager já existe!");
             }
+
             instance = this;
             j_Data = new ToJSONData();
-            LoadAllData();
+
+            var result = MessageBox.Show("Deseja carregar um banco de dados existente?", "Ambiente para Sistemas Especialistas", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if(result == DialogResult.Yes)
+            {
+                using (var fileDialog = new OpenFileDialog())
+                {
+                    fileDialog.DefaultExt = "json";
+                    fileDialog.Filter = "Arquivos JSON (*.json)|*.json";
+                    fileDialog.InitialDirectory = Application.ExecutablePath;
+
+                    var fileResult = fileDialog.ShowDialog();
+
+                    if (fileResult == DialogResult.OK)
+                    {
+                        var filename = fileDialog.FileName;
+                        FileNameToSave = filename;
+                        LoadAllData(filename);
+                    }
+                    else if (fileResult == DialogResult.Cancel)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+            }
+            else if(result == DialogResult.No)
+            {
+                using (var fileDialog = new SaveFileDialog())
+                {
+                    fileDialog.DefaultExt = "json";
+                    fileDialog.Filter = "Arquivo JSON (*.json)|*.json";
+                    fileDialog.FileName = FileNameToSave;
+                    fileDialog.InitialDirectory = Application.ExecutablePath;
+
+                    var fileResult = fileDialog.ShowDialog();
+
+                    if (fileResult == DialogResult.OK)
+                    {
+                        FileNameToSave = fileDialog.FileName;
+                        SaveAllData();
+                    }
+                    else if (fileResult == DialogResult.Cancel)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+            }
+
+            FileInfo file = new FileInfo(FileNameToSave);
+            FileNameToSave = file.Name;
+
+
+
         }
 
         public void SaveAllData()
         {
-            File.WriteAllText(DBName, JsonConvert.SerializeObject(j_Data, Formatting.Indented));
+            File.WriteAllText(FileNameToSave, JsonConvert.SerializeObject(j_Data, Formatting.Indented));
         }
 
-        public void LoadAllData()
+        public void LoadAllData(string db)
         {
-            if (File.Exists(DBName))
-                j_Data = JsonConvert.DeserializeObject<ToJSONData>(File.ReadAllText(DBName));
+            try
+            {
+                j_Data = JsonConvert.DeserializeObject<ToJSONData>(File.ReadAllText(db));
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Banco de dados inválido!");
+                Environment.Exit(0);
+            }
+
+            /*if (File.Exists(DBName))
+                
             else
-                SaveAllData();
+                SaveAllData();*/
         }
 
 

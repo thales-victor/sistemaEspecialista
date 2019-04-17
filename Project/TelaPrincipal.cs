@@ -35,6 +35,12 @@ namespace Project
             AtualizarObjetivos();
 
             AtualizarRegrasCriadas();
+
+            filenameLabel.Text = $"Banco de Dados: {Manager.instance.GetFileName()}";
+
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            testObjetivosEmComum_btn.Hide();
         }
 
 
@@ -51,9 +57,6 @@ namespace Project
             regrasCriadas_listbox.DataSource = Manager.instance.ListarRegras();
         }
 
-
-        //POR FAVOR NÃO MEXE NISSO SEM FALAR COMIGO, EU DEI A VIDA PRA FAZER ISSO FUNCIONAR
-        // -VICTOR
         public Regra[] ObterRegrasComObjetivosAlvo()
         {
             Fato[] FatosAlvos = Manager.instance.ListarAlvos();
@@ -488,6 +491,11 @@ namespace Project
                 str.Append(item.Nome).Append(Environment.NewLine);
 
             MessageBox.Show(str.ToString());
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

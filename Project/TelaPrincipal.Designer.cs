@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.regrasCriadas_listbox = new System.Windows.Forms.ListBox();
             this.btn_play = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
@@ -51,6 +52,7 @@
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.testObjetivosEmComum_btn = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.filenameLabel = new System.Windows.Forms.Label();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -347,17 +349,31 @@
             this.testObjetivosEmComum_btn.UseVisualStyleBackColor = true;
             this.testObjetivosEmComum_btn.Click += new System.EventHandler(this.testObjetivosEmComum_btn_Click);
             // 
+            // filenameLabel
+            // 
+            this.filenameLabel.AutoSize = true;
+            this.filenameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.filenameLabel.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.filenameLabel.ForeColor = System.Drawing.Color.DarkGray;
+            this.filenameLabel.Location = new System.Drawing.Point(13, 4);
+            this.filenameLabel.Name = "filenameLabel";
+            this.filenameLabel.Size = new System.Drawing.Size(95, 15);
+            this.filenameLabel.TabIndex = 11;
+            this.filenameLabel.Text = "Banco de Dados";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(508, 479);
+            this.Controls.Add(this.filenameLabel);
             this.Controls.Add(this.testObjetivosEmComum_btn);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialTabSelector1);
             this.Controls.Add(this.materialTabControl1);
             this.Controls.Add(this.btn_play);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(508, 479);
             this.MinimumSize = new System.Drawing.Size(508, 479);
@@ -365,6 +381,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ambiente para Sistemas Especialistas";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.materialTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -373,6 +391,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -400,6 +419,7 @@
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialRaisedButton visualizarRegra_btn;
         private MaterialSkin.Controls.MaterialRaisedButton testObjetivosEmComum_btn;
+        private System.Windows.Forms.Label filenameLabel;
     }
 }
 
